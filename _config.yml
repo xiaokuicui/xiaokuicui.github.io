@@ -67,7 +67,7 @@ repository: xiaokuicui.github.io
 #Comments
 comments_provider: gitalk
 gitalk:
-    owner: xiaookuicui
+    owner: xiaokuicui
     repo: xiaokuicui.github.io
     clientID: 3d33d1c88f2b0bc7d080
     clientSecret: 6f6b8478618b082705232f036b0d5d9d64e288ea
