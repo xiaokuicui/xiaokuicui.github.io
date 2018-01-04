@@ -9,7 +9,7 @@ side_bar_repo_limit: 5
 # ---------------- #
 #      Author      #
 # ---------------- #
-author: XiaoKui
+author: 晓奎
 github_username: xiaokuicui
 location: Beijing, China
 email: xiaokui.cui@gmail.com
@@ -61,7 +61,6 @@ collections:
         output: true
         permalink: /wiki/:path/
 
-repository: xiaokuicui.github.io
 
 #Comments
 comments_provider: gitalk
