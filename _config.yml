@@ -63,8 +63,8 @@ comments_provider: gitalk
 gitalk:
     owner: xiaokuicui
     repo: xiaokuicui.github.io
-    clientID: f06ff552466b55142032
-    clientSecret: e2bc29cfc743efadb34732ce9f09ec5a7338c674
+    clientID: 4a799cf9f49b37043e3f
+    clientSecret: 8bfc801f25060b57976995562c9dfcbd93898b7e
 
 
 
