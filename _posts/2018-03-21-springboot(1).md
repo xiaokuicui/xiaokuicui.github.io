@@ -134,6 +134,21 @@ root package结构：`com.example.myproject`
 
    标注``@RestController``注解的类不用再使用@Responsebody,也不用在写什么jackjson配置了！
 
-3. 启动Application主类运行应用程序,访问http://localhost:8080就可以看到效果了。
+3. 启动Application主类运行应用程序,访问http://localhost:8080/hello就可以看到效果了。
 
-   ​
+   ![](https://raw.githubusercontent.com/xiaokuicui/xiaokuicui.github.io/master/assets/images/spring-boot/springboot-Application.jpg)
+
+   ``@SpringBootApplication``注解相当于使用``@Configuration @EnableAutoConfiguration @ComponentScan``与他们的默认属性。
+
+## 单元测试
+
+
+
+​    [示例代码](https://github.com/xiaokuicui/spring-boot-cloud-learning-examples)
+
+## Spring Boot Starter
+
+## 参考博客
+
+   - [程序猿DD](http://blog.didispace.com/categories/Spring-Boot/)
+   - [纯洁的微笑](http://www.ityouknow.com/spring-boot.html)
