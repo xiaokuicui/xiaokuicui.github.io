@@ -12,14 +12,15 @@ keywords: Spring,Spring Boot
 
 ## 快速上手
 
-  1.  通过``SPRING INITIALIZR``生成基本项目
+    1.  通过``SPRING INITIALIZR``生成基本项目
 
        1. 访问http://start.spring.io/。
-         2. 选择构建工具、spring boot版本及一些工程基本信息,点击"[Switch to the full version.](https://start.spring.io/#)"可选择Java版本,可参考下图所示:
+       2. 选择构建工具、spring boot版本及一些工程基本信息,点击"[Switch to the full version.](https://start.spring.io/#)"可选择Java版本,可参考下图所示:
 
-     ![](https://raw.githubusercontent.com/xiaokuicui/xiaokuicui.github.io/blob/master/assets/images/spring-boot/springboot-init.jpg)
+ ![](https://raw.githubusercontent.com/xiaokuicui/xiaokuicui.github.io/master/assets/images/spring-boot/springboot-init.jpg)
 
-     3. 点击Generate Project下载项目压缩包。
+​	 3. 点击Generate Project下载项目压缩包。
+
 
  2.  解压压缩包,并用IDEA以Maven项目导入
 
@@ -71,33 +72,68 @@ keywords: Spring,Spring Boot
      ```
 ## 项目结构介绍
 
+![](https://raw.githubusercontent.com/xiaokuicui/xiaokuicui.github.io/master/assets/images/spring-boot/springboot-%E9%A1%B9%E7%9B%AE%E6%9C%BA%E6%9E%84.jpg)
 
+如上图所示,Spring Boot的基础结构共三个文件:
 
-1. spingboot建议的目录结果如下：
+- src/main/java 程序开发以及主程序入口
+- src/main/resources 配置文件
+- src/test/java 测试程序
+
+spingboot建议的目录结果如下：
+
+```
+com
+  +- example
+    +- myproject
+      +- Application.java
+      |
+      +- domain
+      |  +- Customer.java
+      |  +- CustomerRepository.java
+      |
+      +- service
+      |  +- CustomerService.java
+      |
+      +- web
+      |  +- CustomerController.java
+      |
+```
+
+root package结构：`com.example.myproject`
+
+* Application.java 建议放到根目录下面,主要用于做一些框架配置
+* domain目录主要用于实体（Entity）与数据访问层（Repository）
+* service 层主要是业务类代码
+* web负责页面访问控制
+
+## 编写HelloWorld服务
+
+1. 添加支持web的依赖
 
    ```
-   com
-     +- example
-       +- myproject
-         +- Application.java
-         |
-         +- domain
-         |  +- Customer.java
-         |  +- CustomerRepository.java
-         |
-         +- service
-         |  +- CustomerService.java
-         |
-         +- web
-         |  +- CustomerController.java
-         |
+   <dependency>
+     <groupId>org.springframework.boot</groupId>
+     <artifactId>spring-boot-starter-web</artifactId>
+   </dependency>
    ```
 
-   root package结构：`com.example.myproject`
+2. 编写HelloWorldController内容:
 
-   * Application.java 建议放到根目录下面,主要用于做一些框架配置
-   * domain目录主要用于实体（Entity）与数据访问层（Repository）
-   * service 层主要是业务类代码
-   * web负责页面访问控制
+   ```java
+   @RestController 
+   public class HelloWorldController {
 
-2. ​
+       @RequestMapping(value = "/hello", method = RequestMethod.GET)
+       public String helloWorld() {
+           return "Hello World";
+       }
+
+   }
+   ```
+
+   标注``@RestController``注解的类不用再使用@Responsebody,也不用在写什么jackjson配置了！
+
+3. 启动Application主类运行应用程序,访问http://localhost:8080就可以看到效果了。
+
+   ​
