@@ -1,8 +1,10 @@
+---
 layout: post
 title: Spring Boot学习笔记(1)|入门
 categories: Spring
 description: Spring Boot学习笔记
 keywords: Spring,Spring Boot
+---
 
 ## Spring Boot简介
 
