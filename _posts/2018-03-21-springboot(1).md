@@ -1,10 +1,8 @@
----
 layout: post
 title: Spring Boot学习笔记(1)|入门
 categories: Spring
 description: Spring Boot学习笔记
 keywords: Spring,Spring Boot
----
 
 ## Spring Boot简介
 
@@ -12,14 +10,14 @@ keywords: Spring,Spring Boot
 
 ## 快速上手
 
-    1.  通过``SPRING INITIALIZR``生成基本项目
+1.  通过``SPRING INITIALIZR``生成基本项目
+    (1). 访问http://start.spring.io/。
+    (2). 选择构建工具、spring boot版本及一些工程基本信息,点击"[Switch to the full version.](https://start.spring.io/#)"可选择Java版本,可参考下图所示:
 
-       1. 访问http://start.spring.io/。
-       2. 选择构建工具、spring boot版本及一些工程基本信息,点击"[Switch to the full version.](https://start.spring.io/#)"可选择Java版本,可参考下图所示:
 
- ![](https://raw.githubusercontent.com/xiaokuicui/xiaokuicui.github.io/master/assets/images/spring-boot/springboot-init.jpg)
+![](https://raw.githubusercontent.com/xiaokuicui/xiaokuicui.github.io/master/assets/images/spring-boot/springboot-init.jpg)
 
-​	 3. 点击Generate Project下载项目压缩包。
+​	(3). 点击Generate Project下载项目压缩包。
 
 
  2.  解压压缩包,并用IDEA以Maven项目导入
@@ -146,7 +144,21 @@ root package结构：`com.example.myproject`
 
 ​    [示例代码](https://github.com/xiaokuicui/spring-boot-cloud-learning-examples)
 
-## Spring Boot Starter
+## Spring Boot Starter介绍
+
+| 名称                           | 描述                              |
+| ---------------------------- | ------------------------------- |
+| spring-boot-starter          | 核心入门,包括自动配置支持,日志记录和YAML         |
+| spring-boot-starter-activemq | 使用Apache ActiveMQ启动JMS消息传递      |
+| spring-boot-starter-amqp     | 使用Spring AMQP和Rabbit MQ的入门      |
+| spring-boot-starter-aop      | 使用Spring AOP和AspectJ进行面向方面编程的入门 |
+| spring-boot-starter-artemis  | 使用Apache Artemis启动JMS消息传递       |
+| spring-boot-starter-batch    | 使用Spring Batch的入门               |
+|                              |                                 |
+|                              |                                 |
+|                              |                                 |
+
+
 
 ## 参考博客
 
