@@ -11,16 +11,15 @@ keywords: Spring,Spring Boot
 ## 快速上手
 
 1.  通过``SPRING INITIALIZR``生成基本项目
-    (1). 访问http://start.spring.io/。
+   
+    (1). 访问http://start.spring.io/
+    
     (2). 选择构建工具、spring boot版本及一些工程基本信息,点击"[Switch to the full version.](https://start.spring.io/#)"可选择Java版本,可参考下图所示:
+        ![](https://raw.githubusercontent.com/xiaokuicui/xiaokuicui.github.io/master/assets/images/spring-boot/springboot-init.jpg)
+        
+    (3). 点击Generate Project下载项目压缩包。
 
-
-![](https://raw.githubusercontent.com/xiaokuicui/xiaokuicui.github.io/master/assets/images/spring-boot/springboot-init.jpg)
-
-​	(3). 点击Generate Project下载项目压缩包。
-
-
- 2.  解压压缩包,并用IDEA以Maven项目导入
+2.  解压压缩包,并用IDEA以Maven项目导入 
 
      ​	Spring Boot依赖关系使用组``org.springframework.boot``,Maven Pom文件继承``spring-boot-starter-parent``项目。如以下pom清单:
 
