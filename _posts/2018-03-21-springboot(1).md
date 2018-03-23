@@ -8,8 +8,96 @@ keywords: Spring,Spring Boot
 
 ## Spring Boot简介
 
-​	Spring Boot简化了基于Spring应用的初始搭建及开发过程,其充分利用了JavaConfig 的配置模式以及“约定优于配置”的理念,能够极大的简化基于 Spring MVC 的 Web 应用和 REST 服务开发。用我的话来理解,就是Spring Boot其实不是什么新的框架，它默认配置了很多框架的使用方式，就像maven整合了所有的jar包，Spring Boot整合了所有的框架。
+​	Spring Boot简化了基于Spring应用的初始搭建及开发过程,其充分利用了JavaConfig 的配置模式以及“约定优于配置”的理念,能够极大的简化基于 Spring MVC 的 Web 应用和 REST 服务开发。用我的话来理解,就是Spring Boot其实不是什么新的框架，它默认配置了很多框架的使用方式，就像maven整合了所有的jar包，Spring Boot整合了所有的框架。可参考[spring-boot-dependencies.pom](https://github.com/spring-projects/spring-boot/blob/v2.0.0.RELEASE/spring-boot-project/spring-boot-dependencies/pom.xml)来获取整合的第三方框架及各框架版本。
 
 ## 快速上手
 
+  1.  通过``SPRING INITIALIZR``生成基本项目
 
+       1. 访问http://start.spring.io/。
+         2. 选择构建工具、spring boot版本及一些工程基本信息,点击"[Switch to the full version.](https://start.spring.io/#)"可选择Java版本,可参考下图所示:
+
+     ![](https://raw.githubusercontent.com/xiaokuicui/xiaokuicui.github.io/blob/master/assets/images/spring-boot/springboot-init.jpg)
+
+     3. 点击Generate Project下载项目压缩包。
+
+ 2.  解压压缩包,并用IDEA以Maven项目导入
+
+     ​	Spring Boot依赖关系使用组``org.springframework.boot``,Maven Pom文件继承``spring-boot-starter-parent``项目。如以下pom清单:
+
+     ```
+     <?xml version="1.0" encoding="UTF-8"?>
+     <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+     	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+     	<modelVersion>4.0.0</modelVersion>
+
+     	<groupId>com.example</groupId>
+     	<artifactId>myproject</artifactId>
+     	<version>0.0.1-SNAPSHOT</version>
+
+     	<!-- 引入spring-boot-starter-parent父项目 -->
+     	<parent>
+     		<groupId>org.springframework.boot</groupId>
+     		<artifactId>spring-boot-starter-parent</artifactId>
+     		<version>2.0.0.RELEASE</version>
+     	</parent>
+
+     	<properties>
+     		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+     		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+     		<!-- 覆盖父pom定义的变量 -->
+     		<java.version>1.8</java.version>
+     	</properties>
+     	
+     	<!-- 添加spring-boot-starter-web依赖关系,标明正在开发web应用程序 -->
+     	<dependencies>
+     		<dependency>
+     			<groupId>org.springframework.boot</groupId>
+     			<artifactId>spring-boot-starter-web</artifactId>
+     		</dependency>
+     	</dependencies>
+
+     	<!-- 可以将项目打包为可执行的Jar,方便随时随地的运行应用程序,Maven版本必须高于3.2-->
+     	<build>
+     		<plugins>
+     			<plugin>
+     				<groupId>org.springframework.boot</groupId>
+     				<artifactId>spring-boot-maven-plugin</artifactId>
+     			</plugin>
+     		</plugins>
+     	</build>
+
+     </project>
+     ```
+## 项目结构介绍
+
+
+
+1. spingboot建议的目录结果如下：
+
+   ```
+   com
+     +- example
+       +- myproject
+         +- Application.java
+         |
+         +- domain
+         |  +- Customer.java
+         |  +- CustomerRepository.java
+         |
+         +- service
+         |  +- CustomerService.java
+         |
+         +- web
+         |  +- CustomerController.java
+         |
+   ```
+
+   root package结构：`com.example.myproject`
+
+   * Application.java 建议放到根目录下面,主要用于做一些框架配置
+   * domain目录主要用于实体（Entity）与数据访问层（Repository）
+   * service 层主要是业务类代码
+   * web负责页面访问控制
+
+2. ​
