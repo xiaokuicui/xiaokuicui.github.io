@@ -140,8 +140,44 @@ root package结构：`com.example.myproject`
    ``@SpringBootApplication``注解相当于使用``@Configuration @EnableAutoConfiguration @ComponentScan``与他们的默认属性。
 
 ## 单元测试
+  pom文件中添加支持test测试的模块
+```
+<!-- 添加spring-boot-starter-test测试模块,包含JUnit，Hamcrest和Mockito等库 -->
+<dependency>
+	<groupId>org.springframework.boot</groupId>
+	<artifactId>spring-boot-starter-test</artifactId>
+</dependency>
+```
+打开的src/test/下的测试入口，编写简单的http请求来测试；使用mockmvc进行，利用MockMvcResultHandlers.print()打印出执行结果。
+```Java
+/**
+ * HelloWorld测试类.
+ *
+ * @author xiaokui
+ */
+@RunWith(SpringRunner.class)
+@SpringBootTest
+public class HelloWorldControllerTest {
 
+    @Autowired
+    private WebApplicationContext context;
 
+    private MockMvc mvc;
+
+    @Before
+    public void setUp() throws Exception {
+        mvc = MockMvcBuilders.webAppContextSetup(context).build();
+    }
+
+    @Test
+    public void getHello() throws Exception {
+        mvc.perform(MockMvcRequestBuilders.get("/hello").accept(MediaType.APPLICATION_JSON))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.content().string("Hello World"));
+    }
+}
+
+```
 
 ​    [示例代码](https://github.com/xiaokuicui/spring-boot-cloud-learning-examples)
 
