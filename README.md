@@ -1,6 +1,5 @@
-# 学习笔记
 
- 这是我的学习笔记,望大神勿喷。
+ 日常工作/学习笔记.
  
  访问地址：[www.xiaokui.org](http://www.xiaokui.org)
  
