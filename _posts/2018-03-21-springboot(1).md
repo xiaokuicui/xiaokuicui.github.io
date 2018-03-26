@@ -147,7 +147,7 @@ root package结构：`com.example.myproject`
 
 ## Spring Boot Starter介绍
 
-| 名称                           | 描述                              |
+|名称|描述|
 | ---------------------------- | ------------------------------- |
 | spring-boot-starter          | 核心入门,包括自动配置支持,日志记录和YAML  |
 | spring-boot-starter-activemq | 使用Apache ActiveMQ启动JMS消息传递      |
