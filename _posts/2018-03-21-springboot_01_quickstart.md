@@ -9,16 +9,16 @@ keywords: Spring,Spring Boot
 ## Spring Boot简介
 ​	 Spring Boot简化了基于Spring应用的初始搭建及开发过程,其充分利用了JavaConfig 的配置模式以及“约定优于配置”的理念,能够极大的简化基于 Spring MVC 的 Web 应用和 REST 服务开发。用我的话来理解,就是Spring Boot其实不是什么新的框架，它默认配置了很多框架的使用方式，就像maven整合了所有的jar包，Spring Boot整合了所有的框架。可参考[spring-boot-dependencies.pom](https://github.com/spring-projects/spring-boot/blob/v2.0.0.RELEASE/spring-boot-project/spring-boot-dependencies/pom.xml)来获取整合的第三方框架及各框架版本。
 
-## 快速上手
-1. 通过``SPRING INITIALIZR``生成基本项目
+## 1.快速上手
+1.1 通过``SPRING INITIALIZR``生成基本项目
 
     - 访问 http://start.spring.io/
     - 选择构建工具、spring boot版本及一些工程基本信息,点击"Switch to the full version."可选择Java版本.
     - 点击Generate Project下载项目压缩包。
 
-2. 解压压缩包,并用IDEA以Maven项目导入
+1.2 解压压缩包,并用IDEA以Maven项目导入
 
-## 项目结构介绍
+## 2.项目结构介绍
 SpringBoot建议的目录结果如下：
 
   ```
@@ -46,8 +46,8 @@ SpringBoot建议的目录结果如下：
   * service 层主要是业务类代码
   * web负责页面访问控制
 
-## 编写HelloWorld服务
-1. 添加支持web的依赖
+## 3.编写HelloWorld服务
+3.1 添加支持web的依赖
 
    ```
    <dependency>
@@ -55,7 +55,7 @@ SpringBoot建议的目录结果如下：
      <artifactId>spring-boot-starter-web</artifactId>
    </dependency>
    ```
-2. 编写HelloWorldController内容:
+3.2 编写HelloWorldController内容:
 
    ```java
    @RestController
@@ -70,7 +70,7 @@ SpringBoot建议的目录结果如下：
    ```
    标注``@RestController``注解的类不用再使用@Responsebody,也不用在写什么jackjson配置了！
 
-3. 启动Application主类运行应用程序,访问http://localhost:8080/hello就可以看到效果了。
+3.3 启动Application主类运行应用程序,访问http://localhost:8080/hello就可以看到效果了。
 
    ```java
    @SpringBootApplication // same as @Configuration @EnableAutoConfiguration @ComponentScan
@@ -84,7 +84,7 @@ SpringBoot建议的目录结果如下：
 
    ``@SpringBootApplication``注解相当于使用``@Configuration @EnableAutoConfiguration @ComponentScan``三个组合。
 
-## 单元测试
+## 4.单元测试
 pom文件中添加支持test测试的模块
   ```
   <!-- 添加spring-boot-starter-test测试模块,包含JUnit，Hamcrest和Mockito等库 -->

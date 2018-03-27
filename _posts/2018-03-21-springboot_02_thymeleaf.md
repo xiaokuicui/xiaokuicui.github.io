@@ -14,7 +14,7 @@ keywords: Spring,Spring Boot
   - spring-boot-starter-web 2.0.0.RELEASE
   - spring-boot-starter-thymeleaf 2.0.0.RELEASE
 
-## Spring Boot开发Web应用的默认配置
+## 项目目录
 
   Spring Boot默认提供静态资源目录位置需置于classpath下，目录名需符合如下规则:
   - /static (用于存放静态文件)
