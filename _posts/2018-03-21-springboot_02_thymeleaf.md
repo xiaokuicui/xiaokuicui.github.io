@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Spring Boot学习笔记(2)|使用Thymeleaf模板引擎渲染web视图
-categories:  Web应用框架,Spring,Spring Boot
+categories:  Spring Boot
 description: Spring Boot学习笔记
 keywords: Spring Boot
 ---
