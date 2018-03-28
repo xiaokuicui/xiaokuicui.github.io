@@ -1,9 +1,9 @@
 ---
 layout: post
 title: Spring Boot学习笔记(1)|快速上手
-categories: Spring
+categories: Web应用框架,Spring,Spring Boot
 description: Spring Boot学习笔记
-keywords: Spring,Spring Boot
+keywords: Spring Boot
 ---
 
 ​Spring Boot简化了基于Spring应用的初始搭建及开发过程,其充分利用了JavaConfig 的配置模式以及“约定优于配置”的理念,能够极大的简化基于 Spring MVC 的 Web 应用和 REST 服务开发。
