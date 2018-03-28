@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Spring Boot学习笔记(1)|快速上手
-categories: Spring Boot
+categories: Spring
 description: Spring Boot学习笔记
 keywords: Spring Boot
 ---
