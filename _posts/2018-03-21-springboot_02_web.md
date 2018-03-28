@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Spring Boot学习笔记(2)|开发web应用
-categories:  Spring
+categories:  SpringBoot
 description: Spring Boot学习笔记
 keywords: Spring,SpringBoot
 ---
