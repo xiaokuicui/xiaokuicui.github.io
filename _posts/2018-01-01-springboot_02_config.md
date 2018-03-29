@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Spring Boot学习笔记(1)|配置文件
+title: Spring Boot学习笔记(2)|配置文件
 categories: SpringBoot
 ---
 
