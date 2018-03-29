@@ -23,6 +23,7 @@ Spring Boot 支持多种模版引擎包括：
 ## 认识 Thymeleaf 和 FreeMarker
 Thymeleaf 是一款用于渲染 XML/XHTML/HTML5 内容的模板引擎。类似 JSP，Velocity，FreeMaker 等，它也可以轻易的与 Spring MVC 等 Web 框架进行集成作为Web应用的模板引擎。与其它模板引擎相比，Thymeleaf 最大的特点是能够直接在浏览器中打开并正确显示模板页面，而不需要启动整个Web应用.
 
+FreeMarker是一个基于Java的模板引擎，最初专注于使用MVC软件架构生成动态网页。但是，它是一个通用的模板引擎，不依赖于servlets或HTTP或HTML，因此它通常用于生成源代码，配置文件或电子邮件。FreeMarker是自由软件
 
 ## 引入依赖
 ```java
@@ -76,8 +77,11 @@ public class WebController {
 }
 ```
 ``WebController``中的 message 属性获取的是配置文件 ``application.properties``中的内容.
+
 在 src/main/resources/templates 文件夹下创建 thymeleaf.html 和 freemarker.ftl.
-直接运行 src/main/java 目录下的 Application 类或者通过"mvn spring-boot:run"在命令行启动该应用。
+
+直接运行 src/main/java 目录下的 Application 类或者通过"mvn spring-boot:run"在命令行启动该应用.
+
 访问 "http://localhost:8080/thymeleaf/index" 或者 "http://localhost:8080/freemarker/index" 可以看到显示结果.
 
 ## Thymeleaf和FreeMaker的默认参数配置
