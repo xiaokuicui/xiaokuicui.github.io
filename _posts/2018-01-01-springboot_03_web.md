@@ -2,8 +2,6 @@
 layout: post
 title: Spring Boot学习笔记(2)|开发web应用
 categories:  SpringBoot
-description: Spring Boot学习笔记
-keywords: Spring,SpringBoot
 ---
 
 Web 开发是我们平时开发中至关重要的，记录一下 Spring Boot 对Web开发的支持
@@ -122,5 +120,3 @@ spring.freemarker.view-names= # White list of view names that can be resolved.
 ```
 --------
 [示例代码](https://github.com/xiaokuicui/spring-boot-cloud-learning-examples/tree/master/spring-boot-web)
-
-[Spring Boot 公共配置](http://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html)

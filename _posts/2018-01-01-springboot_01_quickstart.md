@@ -2,22 +2,20 @@
 layout: post
 title: Spring Boot学习笔记(1)|快速上手
 categories: SpringBoot
-description: Spring Boot学习笔记
-keywords: Spring,SpringBoot
 ---
 
 ​Spring Boot简化了基于Spring应用的初始搭建及开发过程,其充分利用了JavaConfig 的配置模式以及"约定优于配置"的理念,能够极大的简化基于 Spring MVC 的 Web 应用和 REST 服务开发。
 
-## 1.快速上手
-1.1 通过``SPRING INITIALIZR``生成基本项目
+## 快速上手
+1. 通过``SPRING INITIALIZR``生成基本项目
 
     - 访问 http://start.spring.io/
     - 选择构建工具、spring boot版本及一些工程基本信息,点击"Switch to the full version."可选择Java版本.
     - 点击Generate Project下载项目压缩包。
 
-1.2 解压压缩包,并用IDEA以Maven项目导入
+2. 解压压缩包,并用IDEA以Maven项目导入
 
-## 2.项目结构介绍
+## 项目结构介绍
 SpringBoot建议的目录结果如下：
 
   ```
@@ -45,8 +43,8 @@ SpringBoot建议的目录结果如下：
   * service 层主要是业务类代码
   * web负责页面访问控制
 
-## 3.编写HelloWorld服务
-3.1 添加支持web的依赖
+## 编写HelloWorld服务
+1. 添加支持web的依赖
 
    ```
    <dependency>
@@ -54,7 +52,7 @@ SpringBoot建议的目录结果如下：
      <artifactId>spring-boot-starter-web</artifactId>
    </dependency>
    ```
-3.2 编写HelloWorldController内容:
+2. 编写HelloWorldController内容:
 
    ```java
    @RestController
@@ -69,7 +67,7 @@ SpringBoot建议的目录结果如下：
    ```
    标注``@RestController``注解的类不用再使用@Responsebody,也不用在写什么jackjson配置了！
 
-3.3 启动Application主类运行应用程序,访问http://localhost:8080/hello就可以看到效果了。
+3. 启动Application主类运行应用程序,访问http://localhost:8080/hello就可以看到效果了。
 
    ```java
    @SpringBootApplication // same as @Configuration @EnableAutoConfiguration @ComponentScan
@@ -83,7 +81,7 @@ SpringBoot建议的目录结果如下：
 
    ``@SpringBootApplication``注解相当于使用``@Configuration @EnableAutoConfiguration @ComponentScan``三个组合。
 
-## 4.单元测试
+## 单元测试
 pom文件中添加支持test测试的模块
   ```
   <!-- 添加spring-boot-starter-test测试模块,包含JUnit，Hamcrest和Mockito等库 -->
