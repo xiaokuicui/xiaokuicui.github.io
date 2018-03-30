@@ -142,6 +142,6 @@ public class UserController {
 
 ## [示例代码](https://github.com/xiaokuicui/spring-boot-cloud-learning-examples/tree/master/spring-boot-swagger)
 ## 参考文档
-  [Springfox 官方文档](https://springfox.github.io/springfox/docs/current/)
 
-  [Setting Up Swagger 2 with a Spring REST API](http://www.baeldung.com/swagger-2-documentation-for-spring-rest-api)
+  - [Springfox 官方文档](https://springfox.github.io/springfox/docs/current/)
+  - [Setting Up Swagger 2 with a Spring REST API](http://www.baeldung.com/swagger-2-documentation-for-spring-rest-api)
