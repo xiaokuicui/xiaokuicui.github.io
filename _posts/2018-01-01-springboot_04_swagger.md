@@ -1,11 +1,13 @@
 ---
 layout: post
-title: Spring Boot学习笔记(1)|使用Swagger2构建RESTful API
+title: Spring Boot学习笔记(4)|使用Swagger2构建RESTful API
 categories: SpringBoot
 ---
 
 Swagger2 是一个开源软件框架,可帮助开发人员设计、构建、记录和使用RESTful Web服务。
+
 Swagger2 与语言无关，可扩展到超越HTTP的新技术和协议。定义了一组HTML，JavaScript和CSS资源，以便从符合Swagger的API动态生成文档。Swagger UI项目将这些文件捆绑在一起，以在浏览器上显示API。除了渲染文档外，Swagger UI还允许其他API开发人员或消费者与API资源进行交互，而无需实施任何实现逻辑。
+
 Swagger2 规范（称为 OpenAPI 规范）有几个实现。目前，取代 Swagger-SpringMVC（Swagger 1.2及更早版本）的Springfox在应用程序中很受欢迎。Springfox支持Swagger 1.2和2.0。
 
 
