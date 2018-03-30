@@ -136,14 +136,8 @@ public class UserController {
 
 启动Spring Boot程序，访问：http://localhost:8080/swagger-ui.html 就能看到 Swagger 生成的 REST API 页面了.
 ![](https://raw.githubusercontent.com/xiaokuicui/xiaokuicui.github.io/master/assets/images/swagger.jpg)
+
 展开其中一个接口,点击``Try it out``可以进行测试.
-
-
-
-
-
-
-
 
 ## [示例代码](https://github.com/xiaokuicui/spring-boot-cloud-learning-examples/tree/master/spring-boot-swagger)
 ## 参考文档
