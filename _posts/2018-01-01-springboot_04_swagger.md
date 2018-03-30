@@ -57,8 +57,7 @@ public class SwaggerConfig {
 通过 ``@Configuration`` 注解,让 Spring 来加载该类配置。再通过``@EnableSwagger2``注解来启用 Swagger2。
 1. ``Docket`` 用来初始化为 Swagger 规范2.0.
 2. ``select()`` 函数返回一个 ``ApiSelectorBuilder`` 实例对通过 Swagger2 公开的端点进行精细控制.
-3.  ``apis()`` 使用 RequestHandlerSelectors 过滤API,可以使用``any()``、``none()``、``withClassAnnotation(类注解)``、
-``withMethodAnnotation(方法注解)``、``basePackage(包路径)``等方法.
+3.  ``apis()`` 使用 RequestHandlerSelectors 过滤API,可以使用``any()``、``none()``、``withClassAnnotation(类注解)``、``withMethodAnnotation(方法注解)``、``basePackage(包路径)``等方法.
 这里使用的是 ``basePackage("org.xiaokui.springboot.swagger.web")``. Swagger 会扫描指定包下所有的 Controller ,除了被 ``@ApiIgnore`` 注解标注的接口。
 4. ``	paths()`` 使用 PathSelectors 过滤应用程序的请求路径,可以使用``regex()``、``ant()``、``any()``、``none()``等方法.
 这里使用的是``any("/users/**")``.Swagger 会扫描指定包下请求路径以``/users``开头的 Controller.
@@ -144,4 +143,5 @@ public class UserController {
 ## [示例代码](https://github.com/xiaokuicui/spring-boot-cloud-learning-examples/tree/master/spring-boot-swagger)
 ## 参考文档
   [Springfox 官方文档](https://springfox.github.io/springfox/docs/current/)
+  
   [Setting Up Swagger 2 with a Spring REST API](http://www.baeldung.com/swagger-2-documentation-for-spring-rest-api)
