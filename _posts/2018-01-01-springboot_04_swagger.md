@@ -124,7 +124,7 @@ public class UserController {
 
 }
 ```
-- ``@Api`` 标注在接口上,描述接口的作用.
+- ``@Api`` 标注在接口类上,描述接口的作用.
 - ``@ApiOperation`` 标记在接口方法上,对一个HTTP请求或方法进行描述.
 - ``@ApiImplicitParam`` 对API的单一参数进行注解。其属性``dataType
 ``对应``@ApiModel``的``value``值.
@@ -135,7 +135,8 @@ public class UserController {
 - ``@ApiModelProperty`` 标记在实体类属性上,描述其含义.
 
 启动Spring Boot程序，访问：http://localhost:8080/swagger-ui.html 就能看到 Swagger 生成的 REST API 页面了.
-![]()
+![](https://raw.githubusercontent.com/xiaokuicui/xiaokuicui.github.io/master/assets/images/swagger.jpg)
+展开其中一个接口,点击``Try it out``可以进行测试.
 
 
 
@@ -144,11 +145,7 @@ public class UserController {
 
 
 
-
-
-
-
-
+## [示例代码](https://github.com/xiaokuicui/spring-boot-cloud-learning-examples/tree/master/spring-boot-swagger)
 ## 参考文档
   [Springfox 官方文档](https://springfox.github.io/springfox/docs/current/)
   [Setting Up Swagger 2 with a Spring REST API](http://www.baeldung.com/swagger-2-documentation-for-spring-rest-api)
