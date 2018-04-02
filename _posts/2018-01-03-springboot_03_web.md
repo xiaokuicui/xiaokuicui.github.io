@@ -23,7 +23,7 @@ Thymeleaf 是一款用于渲染 XML/XHTML/HTML5 内容的模板引擎。类似 J
 
 FreeMarker是一个基于Java的模板引擎，最初专注于使用MVC软件架构生成动态网页。但是，它是一个通用的模板引擎，不依赖于servlets或HTTP或HTML，因此它通常用于生成源代码，配置文件或电子邮件。FreeMarker是自由软件
 
-## 引入依赖
+## POM 依赖
 ```java
   <!-- 添加spring-boot-starter-web依赖关系,标明正在开发web应用程序 -->
 		<dependency>

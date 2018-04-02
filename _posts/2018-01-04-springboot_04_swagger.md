@@ -11,7 +11,7 @@ Swagger2 与语言无关，可扩展到超越HTTP的新技术和协议。定义�
 Swagger2 规范（称为 OpenAPI 规范）有几个实现。目前，取代 Swagger-SpringMVC（Swagger 1.2及更早版本）的 Springfox 在应用程序中很受欢迎。Springfox 支持Swagger 1.2和2.0。
 
 
-## 添加 Swagger2 依赖
+## POM 依赖
 在 Spring Boot Web 项目之上添加 Swagger 依赖
 ```java
 <dependency>
