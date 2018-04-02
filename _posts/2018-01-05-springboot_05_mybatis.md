@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Spring Boot学习笔记(4)|MyBatis的使用
+title: Spring Boot学习笔记(5)|MyBatis的使用
 categories: SpringBoot
 ---
 Spring Boot 整合 MyBatis 实现数据存储.并结合通用Mapper、Mybatis Geneator以及分页PageHelper来打造适合企业开发的模板框架.
