@@ -75,5 +75,5 @@ org.xiaokui.random.test2=${random.int[10,20]}
 - ``application.properties``中配置通用内容，并设置``spring.profiles.active=dev``，以开发环境为默认配置
 - ``application-{profile}.properties``中配置各个环境不同的内容
 - 通过命令行方式去激活不同环境的配置
-
+-----
 ## [示例代码](https://github.com/xiaokuicui/spring-boot-cloud-learning-examples/tree/master/spring-boot-web)

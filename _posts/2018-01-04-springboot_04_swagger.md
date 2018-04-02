@@ -140,7 +140,9 @@ public class UserController {
 
 展开其中一个接口,点击``Try it out``可以进行测试.
 
+------
 ## [示例代码](https://github.com/xiaokuicui/spring-boot-cloud-learning-examples/tree/master/spring-boot-swagger)
+
 ## 参考文档
 
   - [Springfox 官方文档](https://springfox.github.io/springfox/docs/current/)

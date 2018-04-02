@@ -278,7 +278,8 @@ public Map<String,Object> findByUserId(@PathVariable("id") Long id){
 }
 }
 ```
-
+-----
+## [示例代码](https://github.com/xiaokuicui/spring-boot-cloud-learning-examples/tree/master/spring-boot-mybatis)
 
 ## 参考文档
   - [MyBatis官方中文参考文档](http://www.mybatis.org/mybatis-3/zh/index.html)
