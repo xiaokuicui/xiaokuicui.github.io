@@ -3,7 +3,7 @@ layout: post
 title: Spring Boot学习笔记(5)|MyBatis的使用
 categories: SpringBoot
 ---
-Spring Boot 整合 MyBatis 实现数据存储.并结合通用Mapper、Mybatis Geneator以及分页PageHelper来打造适合企业开发的模板框架.
+Spring Boot 整合 MyBatis 实现数据存储.
 
 ## POM 依赖
 
@@ -48,46 +48,50 @@ spring.datasource.username = root
 spring.datasource.password = root
 ```
 2. 使用自定义数据源(druid)
-添加 druid 依赖
-```Java
-<dependency>
-  <groupId>com.alibaba</groupId>
-  <artifactId>druid</artifactId>
-  <version>1.1.9</version>
-</dependency>
-```
-通过 Java Config 创建 dataSource.
-```Java
-/**
- * @author xiaokui
- * @Description:数据源 Druid 配置
- * @date 2018-04-02 15:29
- */
-@Configuration
-public class DruidConfig {
 
-    @Value("${spring.datasource.url}")
-    private String dbUrl;
-    @Value("${spring.datasource.username}")
-    private String username;
-    @Value("${spring.datasource.password}")
-    private String password;
-    @Value("${spring.datasource.driver-class-name}")
-    private String driverClassName;
+  添加 druid 依赖
 
-    //destroy-method="close"的作用是当数据库连接不使用的时候,就把该连接重新放到数据池中,方便下次使用调用.
-    @Bean(destroyMethod =  "close")
-    public DataSource dataSource(){
-        DruidDataSource datasource = new DruidDataSource();
-        datasource.setUrl(this.dbUrl);
-        datasource.setUsername(username);
-        datasource.setPassword(password);
-        datasource.setDriverClassName(driverClassName);
-        return datasource;
-    }
-}
-```
-durid 官方文档 : <https://github.com/alibaba/druid/wiki/常见问题>
+  ```Java
+  <dependency>
+    <groupId>com.alibaba</groupId>
+    <artifactId>druid</artifactId>
+    <version>1.1.9</version>
+  </dependency>
+  ```
+
+  通过 Java Config 创建 dataSource.
+
+  ```Java
+  /**
+   * @author xiaokui
+   * @Description:数据源 Druid 配置
+   * @date 2018-04-02 15:29
+   */
+  @Configuration
+  public class DruidConfig {
+
+      @Value("${spring.datasource.url}")
+      private String dbUrl;
+      @Value("${spring.datasource.username}")
+      private String username;
+      @Value("${spring.datasource.password}")
+      private String password;
+      @Value("${spring.datasource.driver-class-name}")
+      private String driverClassName;
+
+      //destroy-method="close"的作用是当数据库连接不使用的时候,就把该连接重新放到数据池中,方便下次使用调用.
+      @Bean(destroyMethod =  "close")
+      public DataSource dataSource(){
+          DruidDataSource datasource = new DruidDataSource();
+          datasource.setUrl(this.dbUrl);
+          datasource.setUsername(username);
+          datasource.setPassword(password);
+          datasource.setDriverClassName(driverClassName);
+          return datasource;
+      }
+  }
+  ```
+  durid 官方文档 : <https://github.com/alibaba/druid/wiki/常见问题>
 
 ## SQL 脚本初始化
 ``` mysql
@@ -110,6 +114,7 @@ CREATE TABLE `t_user` (
 ## 整合 MyBatis
 
 ### 方案一 通过注解的方式
+
 ##### 实体对象
 ```Java
 /**
@@ -209,16 +214,17 @@ public class UserController {
     }
 }
 
+```
+
 运行``Application.java`` 打开浏览器在 http://localhost:8080/swagger-ui.html 页面进行测试.
 
-```
 ### 方案二 通过XML的方式
 
 ##### 配置相关
 
 在 ``src/main/resources/mybatis/UserMapper.xml`` 中配置数据源信息。
 
-```Java
+``` xml
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
@@ -236,12 +242,13 @@ public class UserController {
 </mapper>
 ```
 
-在 ``src/main/resources/application.properties`` 中配置数据源信息。
+在``src/main/resources/application.properties`` 中配置数据源信息。
 
-``` Java
+```xml
 #指定映射文件
 mybatis.mapperLocations=classpath:mapper/*.xml
 ```
+
 
 ##### Mapper相关
 新建``UserMapper2.java``接口类,无需相关实现类
@@ -271,33 +278,7 @@ public Map<String,Object> findByUserId(@PathVariable("id") Long id){
 }
 }
 ```
-##### 用 MockMvc 进行单元测试
-MockMvc 实现了对Http请求的模拟，能够直接使用网络的形式，转换到Controller的调用，这样可以使得测试速度快、不依赖网络环境，而且提供了一套验证的工具，这样可以使得请求的验证统一而且很方便.
-```java
-@RunWith(SpringRunner.class)
-@SpringBootTest
-public class HelloWorldControllerTest {
 
-    @Autowired
-    private WebApplicationContext context;
-
-    private MockMvc mvc;
-
-    @Before
-    public void setUp() throws Exception {
-        mvc = MockMvcBuilders.webAppContextSetup(context).build();
-    }
-
-    @Test
-    public void getHello() throws Exception {
-        mvc.perform(MockMvcRequestBuilders.get("/hello").accept(MediaType.APPLICATION_JSON))
-                .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.content().string("Hello World"));
-    }
-}
-```
 
 ## 参考文档
   - [MyBatis官方中文参考文档](http://www.mybatis.org/mybatis-3/zh/index.html)
-  - [springboot 单元测试](http://tengj.top/2017/12/28/springboot12/)
-  - [MockMVC学习笔记](https://blog.csdn.net/xiao_xuwen/article/details/52890730)
