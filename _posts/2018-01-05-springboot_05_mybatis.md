@@ -265,17 +265,18 @@ public interface UserMapper2 {
 @RestController
 @RequestMapping(value = "/users")
 public class UserController2{
-@ApiOperation(value = "查询用户",notes = "根据id查询用户")
-@ApiImplicitParam(name = "id",value = "用户id",required = true)
-@RequestMapping(value = "/show/{id}",method = RequestMethod.GET,produces = "application/json")
-public Map<String,Object> findByUserId(@PathVariable("id") Long id){
-    Map<String,Object> map = new HashMap<>();
-    User user = userService.findUserById(id);
-    map.put("code","0");
-    map.put("result",user);
-    map.put("message","成功");
-    return map;
-}
+
+  @ApiOperation(value = "查询用户",notes = "根据id查询用户")
+  @ApiImplicitParam(name = "id",value = "用户id",required = true)
+  @RequestMapping(value = "/show/{id}",method = RequestMethod.GET,produces = "application/json")
+  public Map<String,Object> findByUserId(@PathVariable("id") Long id){
+      Map<String,Object> map = new HashMap<>();
+      User user = userService.findUserById(id);
+      map.put("code","0");
+      map.put("result",user);
+      map.put("message","成功");
+      return map;
+  }
 }
 ```
 -----
