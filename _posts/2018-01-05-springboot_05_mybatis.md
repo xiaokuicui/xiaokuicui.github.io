@@ -325,19 +325,18 @@ public class UserController2 {
     </context>
 </generatorConfiguration>
 ```
-``tk.mybatis.mapper.generator.MapperPlugin``用来指定通用 Mapper 类,生成的 Mapper 会集成这个类.
+``tk.mybatis.mapper.generator.MapperPlugin``用来指定继承通用 Mapper 的接口.生成的 Mapper 会继承这个类.
 运行命令:``mvn mybatis-generator:generate``.就会自动生成表对应的 Model,Mappe 以及 XML.
 
 ## 通用 Mapper 配置
-通用 Mapper 可以极大的方便开发人员,对单表封装了许多通用方法，省掉自己写增删改查的sql。
+通用 Mapper 可以极大的方便开发人员,对单表封装了许多通用方法，省掉自己写增删改查的sql.
+实现一个接口继承通用的 Mapper.
 ```java
 public interface MyMapper<T> extends Mapper<T>,MySqlMapper<T> {
     //TODO
     //FIXME 特别注意，该接口不能被扫描到，否则会出错
 }
 ```
-这里实现一个自己的接口,继承通用的 mapper,特别注意，该接口不能被扫描到，否则会出错.
-
 1. 在``src/main/resources/application.properties``加入以下内容
 ```properties
 # 指定javabean所在包
@@ -413,6 +412,7 @@ public class CountryController {
     }
 }
 ```
+
 注意:使用通用 Mapper,``Application.java``中引入``@MapperScan``的时候要选择``@tk.mybatis.spring.annotation.MapperScan``
 
 运行``Application.java`` 打开浏览器在 http://localhost:8080/swagger-ui.html 页面进行测试.
