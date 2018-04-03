@@ -413,6 +413,7 @@ public class CountryController {
     }
 }
 ```
+注意:使用通用 Mapper,``Application.java``中引入``@MapperScan``的时候要选择``@tk.mybatis.spring.annotation.MapperScan``
 
 运行``Application.java`` 打开浏览器在 http://localhost:8080/swagger-ui.html 页面进行测试.
 
