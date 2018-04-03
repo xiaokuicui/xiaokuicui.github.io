@@ -1,14 +1,14 @@
 ---
 layout: post
-title: Spring Boot学习笔记(5)|MyBatis的使用
+title: Spring Boot学习笔记(5)|集成MyBatis,分页插件PageHelper, 通用Mapper
 categories: SpringBoot
 ---
-Spring Boot 整合 MyBatis 实现数据存储.
+Spring Boot 整合 MyBatis 实现数据存储.并结合通用 Mapper、Mybatis Geneator 以及分页 PageHelper 来打造适合企业开发的模板框架.
 
-## POM 依赖
+## Mybatis POM 依赖
 
-- 引入整合 myBatis 的核心依赖 mybatis-spring-boot-starter,可以不添加 spring-boot-starter-jdbc.因为 mybatis-spring-boot-starter 依赖中存在 spring-boot-starter-jdbc.
-- 引入连接 mysql 的必要依赖mysql-connector-java.
+- 引入整合 myBatis 的核心依赖 ``mybatis-spring-boot-starter``,可以不添加 ``spring-boot-starter-jdbc``.因为 ``mybatis-spring-boot-starter`` 依赖中存在 ``spring-boot-starter-jdbc``.
+- 引入连接 mysql 的必要依赖``mysql-connector-java``.
 
 ```java
 <dependency>
@@ -24,7 +24,7 @@ Spring Boot 整合 MyBatis 实现数据存储.
 </dependency>
 ```
 
-添加了 ``mybatis-spring-boot-starter`` 之后, Spring Boot 会自动加载 ``spring.datasource.*``相关配置(``application.properties``中配置);自动创建使用该 DataSource 的 SqlSessionFactoryBean 以及 SqlSessionTemplate;自动扫描 Mappers 连接到 SqlSessionTemplate 并注册到 Spring 上下文中.
+添加了 ``mybatis-spring-boot-starter`` 之后, Spring Boot 会自动加载 ``spring.datasource.*``相关配置(``application.properties``中配置);自动创建使用该 DataSource 的 ``SqlSessionFactoryBean`` 以及 ``SqlSessionTemplate``;自动扫描 Mappers 连接到 ``SqlSessionTemplate`` 并注册到 Spring 上下文中.
 
 在启动类中添加对 mapper 包扫描 ``@MapperScan``
 ```Java
@@ -39,7 +39,7 @@ public class Application {
 ```
 
 ## 数据源配置
-1. 使用 Spring Boot 默认数据源(tomcat-jdbc).
+
 在 src/main/resources/application.properties 中配置数据源信息.
 ```Java
 spring.datasource.driver-class-name = com.mysql.jdbc.Driver
@@ -47,52 +47,6 @@ spring.datasource.url  =jdbc:mysql://localhost:3306/spring-boot?useUnicode=true&
 spring.datasource.username = root
 spring.datasource.password = root
 ```
-2. 使用自定义数据源(druid)
-
-  添加 druid 依赖
-
-  ```Java
-  <dependency>
-    <groupId>com.alibaba</groupId>
-    <artifactId>druid</artifactId>
-    <version>1.1.9</version>
-  </dependency>
-  ```
-
-  通过 Java Config 创建 dataSource.
-
-  ```Java
-  /**
-   * @author xiaokui
-   * @Description:数据源 Druid 配置
-   * @date 2018-04-02 15:29
-   */
-  @Configuration
-  public class DruidConfig {
-
-      @Value("${spring.datasource.url}")
-      private String dbUrl;
-      @Value("${spring.datasource.username}")
-      private String username;
-      @Value("${spring.datasource.password}")
-      private String password;
-      @Value("${spring.datasource.driver-class-name}")
-      private String driverClassName;
-
-      //destroy-method="close"的作用是当数据库连接不使用的时候,就把该连接重新放到数据池中,方便下次使用调用.
-      @Bean(destroyMethod =  "close")
-      public DataSource dataSource(){
-          DruidDataSource datasource = new DruidDataSource();
-          datasource.setUrl(this.dbUrl);
-          datasource.setUsername(username);
-          datasource.setPassword(password);
-          datasource.setDriverClassName(driverClassName);
-          return datasource;
-      }
-  }
-  ```
-  durid 官方文档 : <https://github.com/alibaba/druid/wiki/常见问题>
-
 ## SQL 脚本初始化
 ``` mysql
 CREATE DATABASE `spring-boot-test`;
@@ -111,7 +65,7 @@ CREATE TABLE `t_user` (
 ) ENGINE=InnoDB COMMENT '用户表';
 ```
 
-## 整合 MyBatis
+## 集成 MyBatis
 
 ### 方案一 通过注解的方式
 
@@ -215,14 +169,11 @@ public class UserController {
 }
 
 ```
-
-运行``Application.java`` 打开浏览器在 http://localhost:8080/swagger-ui.html 页面进行测试.
-
 ### 方案二 通过XML的方式
 
 ##### 配置相关
 
-在 ``src/main/resources/mybatis/UserMapper.xml`` 中配置数据源信息。
+在 ``src/main/resources/mapper`` 路径下创建``UserMapper.xml``文件.标明映射的 Mapper 类、JavaBean 及 SQL.
 
 ``` xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -242,7 +193,7 @@ public class UserController {
 </mapper>
 ```
 
-在``src/main/resources/application.properties`` 中配置数据源信息。
+在``src/main/resources/application.properties`` 中配置映射文件的路径.
 
 ```xml
 #指定映射文件
@@ -263,24 +214,46 @@ public interface UserMapper2 {
 ##### Controller相关
 ```java
 @RestController
-@RequestMapping(value = "/users")
-public class UserController2{
+@RequestMapping(value = "/users2")
+@Api(value = "/users2",description = "XML配置-用户管理2")
+public class UserController2 {
+    @Autowired
+    private UserService userService;
 
-  @ApiOperation(value = "查询用户",notes = "根据id查询用户")
-  @ApiImplicitParam(name = "id",value = "用户id",required = true)
-  @RequestMapping(value = "/show/{id}",method = RequestMethod.GET,produces = "application/json")
-  public Map<String,Object> findByUserId(@PathVariable("id") Long id){
-      Map<String,Object> map = new HashMap<>();
-      User user = userService.findUserById(id);
-      map.put("code","0");
-      map.put("result",user);
-      map.put("message","成功");
-      return map;
-  }
+    @ApiOperation(value = "查询用户",notes = "根据id查询用户")
+    @ApiImplicitParam(name = "id",value = "用户id",required = true)
+    @RequestMapping(value = "/show/{id}",method = RequestMethod.GET,produces = "application/json")
+    public Map<String,Object> findByUserId(@PathVariable("id") Long id){
+        Map<String,Object> map = new HashMap<>();
+        User user = userService.findUserById(id);
+        map.put("code","0");
+        map.put("result",user);
+        map.put("message","成功");
+        return map;
+    }
 }
+```
+运行``Application.java`` 打开浏览器在 http://localhost:8080/swagger-ui.html 页面进行测试.
+
+
+## 集成通用 Mapper、分页插件 PageHelper依赖
+```xml
+<!--mapper-->
+<dependency>
+    <groupId>tk.mybatis</groupId>
+    <artifactId>mapper-spring-boot-starter</artifactId>
+    <version>1.2.4</version>
+</dependency>
+<!--pagehelper-->
+<dependency>
+    <groupId>com.github.pagehelper</groupId>
+    <artifactId>pagehelper-spring-boot-starter</artifactId>
+    <version>1.2.3</version>
+</dependency>
 ```
 -----
 ## [示例代码](https://github.com/xiaokuicui/spring-boot-cloud-learning-examples/tree/master/spring-boot-mybatis)
 
 ## 参考文档
   - [MyBatis官方中文参考文档](http://www.mybatis.org/mybatis-3/zh/index.html)
+  - [Durid官方文档](https://github.com/alibaba/druid/wiki/常见问题)
