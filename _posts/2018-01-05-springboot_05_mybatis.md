@@ -256,4 +256,3 @@ public class UserController2 {
 
 ## 参考文档
   - [MyBatis官方中文参考文档](http://www.mybatis.org/mybatis-3/zh/index.html)
-  - [Durid官方文档](https://github.com/alibaba/druid/wiki/常见问题)
