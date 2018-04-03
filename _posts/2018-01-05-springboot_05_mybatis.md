@@ -20,7 +20,6 @@ Spring Boot 整合 MyBatis 实现数据存储.并结合通用 Mapper、Mybatis G
 <dependency>
   <groupId>mysql</groupId>
   <artifactId>mysql-connector-java</artifactId>
-  <version>6.0.6</version>
 </dependency>
 ```
 
@@ -198,6 +197,8 @@ public class UserController {
 ```xml
 #指定映射文件
 mybatis.mapperLocations=classpath:mapper/*.xml
+# 指定javabean所在包
+mybatis.type-aliases-package=org.xiaokui.springboot.mybatis.domain
 ```
 
 
@@ -233,26 +234,192 @@ public class UserController2 {
     }
 }
 ```
-运行``Application.java`` 打开浏览器在 http://localhost:8080/swagger-ui.html 页面进行测试.
 
-
-## 集成通用 Mapper、分页插件 PageHelper依赖
+## 集成通用 Mapper、分页插件 PageHelper 依赖
 ```xml
-<!--mapper-->
+<!--通用mapper-->
 <dependency>
-    <groupId>tk.mybatis</groupId>
-    <artifactId>mapper-spring-boot-starter</artifactId>
-    <version>1.2.4</version>
+  <groupId>tk.mybatis</groupId>
+  <artifactId>mapper-spring-boot-starter</artifactId>
+  <version>1.2.4</version>
 </dependency>
 <!--pagehelper-->
 <dependency>
-    <groupId>com.github.pagehelper</groupId>
-    <artifactId>pagehelper-spring-boot-starter</artifactId>
-    <version>1.2.3</version>
+  <groupId>com.github.pagehelper</groupId>
+  <artifactId>pagehelper-spring-boot-starter</artifactId>
+  <version>1.2.3</version>
 </dependency>
+
+<!-- 引入mybatis-generator插件 -->
+<plugin>
+<groupId>org.mybatis.generator</groupId>
+<artifactId>mybatis-generator-maven-plugin</artifactId>
+<version>1.3.2</version>
+<dependencies>
+	<dependency>
+		<groupId>mysql</groupId>
+		<artifactId>mysql-connector-java</artifactId>
+		<version>${mysql.version}</version>
+	</dependency>
+	<dependency>
+		<groupId>tk.mybatis</groupId>
+		<artifactId>mapper-generator</artifactId>
+		<version>1.0.0</version>
+	</dependency>
+</dependencies>
+<configuration>
+	<configurationFile>${basedir}/src/main/resources/generator/generatorConfig.xml</configurationFile>
+	<overwrite>true</overwrite>
+	<verbose>true</verbose>
+</configuration>
+</plugin>
 ```
+引入了``mybatis-generator-maven-plugin``插件,详细的配置可参考 [官方MyBatis Generator中文文档](http://mbg.cndocs.ml/running/runningWithMaven.html)
+
+## MyBatis Generator 配置
+在``src/main/resources/generator``路径下新建``generatorConfig.xml``文件,加入以下内容:
+
+```XML
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+    <properties resource="application.properties"/>
+
+    <context id="Mysql" targetRuntime="MyBatis3Simple" defaultModelType="flat">
+
+        <plugin type="tk.mybatis.mapper.generator.MapperPlugin">
+            <property name="mappers" value="org.xiaokui.springboot.mybatis.common.MyMapper"/>
+        </plugin>
+
+
+        <!--数据库链接地址账号密码-->
+        <jdbcConnection driverClass="${spring.datasource.driver-class-name}"
+                        connectionURL="${spring.datasource.url}"
+                        userId="${spring.datasource.username}"
+                        password="${spring.datasource.password}">
+        </jdbcConnection>
+
+        <!--生成Model类存放位置-->
+        <javaModelGenerator targetPackage="org.xiaokui.springboot.mybatis.domain" targetProject="src/main/java"/>
+
+        <!--生成映射文件存放位置-->
+        <sqlMapGenerator targetPackage="mapper" targetProject="src/main/resources"/>
+
+        <!--
+        生成Mapper类存放位置
+        type="ANNOTATEDMAPPER",生成Java Model 和基于注解的Mapper对象
+        type="XMLMAPPER",生成SQLMap XML文件和独立的Mapper接口
+        -->
+        <javaClientGenerator targetPackage="org.xiaokui.springboot.mybatis.mapper" targetProject="src/main/java" type="XMLMAPPER"/>
+
+
+        <!--生成对应表及类名 去掉Mybatis Generator生成的一堆 example-->
+        <table tableName="t_city" domainObjectName="City" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
+        </table>
+        <table tableName="t_country" domainObjectName="Country" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+            <generatedKey column="id" sqlStatement="Mysql" identity="true"/>
+        </table>
+    </context>
+</generatorConfiguration>
+```
+``tk.mybatis.mapper.generator.MapperPlugin``用来指定通用 Mapper 类,生成的 Mapper 会集成这个类.
+运行命令:``mvn mybatis-generator:generate``.就会自动生成表对应的 Model,Mappe 以及 XML.
+
+## 通用 Mapper 配置
+通用 Mapper 可以极大的方便开发人员,对单表封装了许多通用方法，省掉自己写增删改查的sql。
+```java
+public interface MyMapper<T> extends Mapper<T>,MySqlMapper<T> {
+    //TODO
+    //FIXME 特别注意，该接口不能被扫描到，否则会出错
+}
+```
+这里实现一个自己的接口,继承通用的 mapper,特别注意，该接口不能被扫描到，否则会出错.
+
+1. 在``src/main/resources/application.properties``加入以下内容
+```properties
+# 指定javabean所在包
+mybatis.type-aliases-package=org.xiaokui.springboot.mybatis.domain
+# 指定映射文件
+mybatis.mapper-locations=classpath:mapper/*.xml
+# mappers 多个接口时逗号隔开
+mapper.mappers=org.xiaokui.springboot.mybatis.common.MyMapper
+mapper.not-empty=false
+mapper.identity=MYSQL
+# pagehelper
+pagehelper.helperDialect=mysql
+pagehelper.reasonable=true
+pagehelper.supportMethodsArguments=true
+pagehelper.params=count=countSql
+```
+2. Server层
+```java
+@Service
+public class CountryServiceImpl implements CountryService {
+
+    @Autowired
+    private CountryMapper countryMapper;
+
+    @Override
+    public List<Country> getAll(Country country) {
+        if (country.getPage() != null && country.getRows() != null) {
+            PageHelper.startPage(country.getPage(), country.getRows());
+        }
+        return countryMapper.selectAll();
+    }
+
+    @Override
+    public Country getById(Long id) {
+        return countryMapper.selectByPrimaryKey(id);
+    }
+
+    @Override
+    public void deleteById(Long id) {
+         countryMapper.deleteByPrimaryKey(id);
+    }
+
+    @Override
+    public void save(Country country) {
+        if(country.getId() != null){
+            countryMapper.updateByPrimaryKey(country);
+        }else {
+            countryMapper.insert(country);
+        }
+    }
+}
+```
+3. Controller 层
+```java
+@RestController
+@RequestMapping(value = "/countries")
+@Api(value = "/countries",description = "国家管理")
+public class CountryController {
+
+    @Autowired
+    private CountryService countryService;
+
+    @ApiOperation(value = "获取国家列表",notes = "查询国家列表")
+    @ApiImplicitParam(name = "county",value = "County实体",required = false,dataType = "country")
+    @RequestMapping(value = "/list",method = RequestMethod.GET,produces = "application/json")
+    public Map<String,Object> getAll(@RequestBody Country country){
+        Map<String,Object> map = new HashMap<>();
+        List<Country> list = countryService.getAll(country);
+        map.put("code","0");
+        map.put("data",new PageInfo<Country>(list));
+        map.put("message","成功");
+        return map;
+    }
+}
+```
+
+运行``Application.java`` 打开浏览器在 http://localhost:8080/swagger-ui.html 页面进行测试.
+
 -----
 ## [示例代码](https://github.com/xiaokuicui/spring-boot-cloud-learning-examples/tree/master/spring-boot-mybatis)
 
 ## 参考文档
   - [MyBatis官方中文参考文档](http://www.mybatis.org/mybatis-3/zh/index.html)
+  - [MyBatis-Generator官方中文文档](http://mbg.cndocs.ml/)
+  - [通过Mapper作者GitHub地址](https://github.com/abel533)
