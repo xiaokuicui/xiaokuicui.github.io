@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Spring Boot学习笔记(5)|集成MyBatis,分页插件PageHelper, 通用Mapper
+title: Spring Boot学习笔记-集成MyBatis,分页插件PageHelper, 通用Mapper
 categories: SpringBoot
 ---
 Spring Boot 整合 MyBatis 实现数据存储.并结合通用 Mapper、Mybatis Geneator 以及分页 PageHelper 来打造适合企业开发的模板框架.
@@ -46,6 +46,8 @@ spring.datasource.url  =jdbc:mysql://localhost:3306/spring-boot?useUnicode=true&
 spring.datasource.username = root
 spring.datasource.password = root
 ```
+Spring Boot 2.0 默认使用的数据连接池是**HikariCP连接池**.
+
 ## SQL 脚本初始化
 ``` mysql
 CREATE DATABASE `spring-boot-test`;

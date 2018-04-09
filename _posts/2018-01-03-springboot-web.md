@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Spring Boot学习笔记(3)|集成Thymeleaf、FreeMarker开发web应用
+title: Spring Boot学习笔记-集成Thymeleaf、FreeMarker开发web应用
 categories:  SpringBoot
 ---
 
@@ -17,11 +17,6 @@ Spring Boot 支持多种模版引擎包括：
 
 ## 静态文件
 默认情况下，Spring Boot 从 classpath 下一个叫 /static（/public，/resources或/META-INF/resources）的文件夹提供静态内容,优先级顺序为：META-INF/resources > resources > static > public.
-
-## 认识 Thymeleaf 和 FreeMarker
-Thymeleaf 是一款用于渲染 XML/XHTML/HTML5 内容的模板引擎。类似 JSP，Velocity，FreeMaker 等，它也可以轻易的与 Spring MVC 等 Web 框架进行集成作为Web应用的模板引擎。与其它模板引擎相比，Thymeleaf 最大的特点是能够直接在浏览器中打开并正确显示模板页面，而不需要启动整个Web应用.
-
-FreeMarker 是一个基于Java的模板引擎，最初专注于使用MVC软件架构生成动态网页。但是，它是一个通用的模板引擎，不依赖于servlets或HTTP或HTML，因此它通常用于生成源代码，配置文件或电子邮件。FreeMarker是自由软件
 
 ## POM 依赖
 ```java
@@ -41,9 +36,25 @@ FreeMarker 是一个基于Java的模板引擎，最初专注于使用MVC软件�
 <dependency>
 	<groupId>org.springframework.boot</groupId>
 	<artifactId>spring-boot-starter-freemarker</artifactId>
-</dependency>    
+</dependency>
+
+<dependency>
+	<groupId>org.springframework.boot</groupId>
+	<artifactId>spring-boot-devtools</artifactId>
+	<optional>true</optional>
+</dependency>
+
 ```
 在实际项目中,根据需要 ``spring-boot-starter-freemarker`` 和 ``spring-boot-starter-thymeleaf`` 任选其一.
+
+``spring-boot-devtools``为应用提供一些开发时特性，包括默认值设置，自动重启，livereload等.
+``<optional>true</optional>``可以防止使用项目将devtools传递性地应用于其他模块.
+
+模板引擎的页面默认是开启缓存，如果修改页面内容，刷新页面是无法获取修改后的页面内容，所以如果我们不需要模板引擎的缓存,可以进行关闭.
+```properties
+spring.thymeleaf.cache=false
+spring.freemarker.cache=false
+```
 
 ## 编写控制类和模板
 ```java
