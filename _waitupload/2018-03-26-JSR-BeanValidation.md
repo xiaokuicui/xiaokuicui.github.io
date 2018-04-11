@@ -227,7 +227,3 @@ Order order = new Order();
  Validator validator = factory.getValidator();
  Set<ConstraintViolation<Order>> violations = validator.validate(order);
 ```
-
-### 结束语
-
-JSR 303 的发布使得在数据自动绑定和验证变得简单，使开发人员在定义数据模型时不必考虑实现框架的限制。当然 Bean Validation 还只是提供了一些最基本的 constraint，在实际的开发过程中，用户可以根据自己的需要组合或开发出更加复杂的 constraint
