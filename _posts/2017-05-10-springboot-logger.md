@@ -265,11 +265,12 @@ public class SpringBootJpaApplication {
   - 运行``SpringBootJpaApplication``,root将级别为"INFO"及大于"INFO"的日志信息交给已经配置好的名为"Console"的appender处理,"Console"appender将信息打印到控制台；
   打印结果如下:
   ```Java
-  13:35:48.910 [main]  INFO  o.x.s.jpa.SpringBootJpaApplication - 打印INFO信息
+13:35:48.910 [main]  INFO  o.x.s.jpa.SpringBootJpaApplication - 打印INFO信息
 13:35:48.910 [main]  WARN  o.x.s.jpa.SpringBootJpaApplication - 打印WARN信息
 13:35:48.910 [main]  ERROR o.x.s.jpa.SpringBootJpaApplication - 打印ERROR信息
   ```
 2. 带有loger的配置，不指定级别,不指定appender.
+
 ```XML
 <configuration>
 
@@ -294,11 +295,12 @@ public class SpringBootJpaApplication {
  - root接到下级传递的信息，交给已经配置好的名为"Console"的appender处理，"Console"appender将信息打印到控制台；
  打印结果如下:
  ```java
- 20:54:44.304 [main]  INFO  o.x.s.jpa.SpringBootJpaApplication - 打印INFO信息
+20:54:44.304 [main]  INFO  o.x.s.jpa.SpringBootJpaApplication - 打印INFO信息
 20:54:44.304 [main]  WARN  o.x.s.jpa.SpringBootJpaApplication - 打印WARN信息
 20:54:44.304 [main]  ERROR o.x.s.jpa.SpringBootJpaApplication - 打印ERROR信息
  ```
 3. 带有多个loger的配置，指定级别,指定appender
+
 ```XML
 <configuration>
 
