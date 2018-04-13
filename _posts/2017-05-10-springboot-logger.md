@@ -269,12 +269,10 @@ public class SpringBootJpaApplication {
 13:35:48.910 [main]  WARN  o.x.s.jpa.SpringBootJpaApplication - 打印WARN信息
 13:35:48.910 [main]  ERROR o.x.s.jpa.SpringBootJpaApplication - 打印ERROR信息
   ```
-
 2. 带有loger的配置，不指定级别,不指定appender.
 
 ```XML
 <configuration>
-
     <appender name="Console" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
             <pattern>%d{HH:mm:ss.SSS} [%thread]  %-5level %logger{36} - %msg%n</pattern>
@@ -300,7 +298,6 @@ public class SpringBootJpaApplication {
 20:54:44.304 [main]  WARN  o.x.s.jpa.SpringBootJpaApplication - 打印WARN信息
 20:54:44.304 [main]  ERROR o.x.s.jpa.SpringBootJpaApplication - 打印ERROR信息
  ```
- 
 3. 带有多个loger的配置，指定级别,指定appender
 
 ```XML
