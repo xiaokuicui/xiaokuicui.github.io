@@ -35,7 +35,7 @@ Spring Boot 采用 Commons Logging 作为内部的日志框架,对于日志的�
 
 >注：二者不能同时使用，如若同时使用，则只有logging.file生效
 
-**默认情况下，日志文件的大小达到10MB时会切分一次，产生新的日志文件，默认级别为：ERROR、WARN、INFO**
+*默认情况下，日志文件的大小达到10MB时会切分一次，产生新的日志文件，默认级别为：ERROR、WARN、INFO*
 
 ### 自定义日志配置
 通过将不同的日志依赖包添加到classpath 中，Spring Boot 的日志系统能够判断激活不同的日志实现方式。更进一步的配置是将自定义的日志配置文件添加到``classpath`` 中.
@@ -50,7 +50,7 @@ Spring Boot 采用 Commons Logging 作为内部的日志框架,对于日志的�
 |log4j2|``log4j2-spring.xml``, ``log4j2.xml``|
 |JDK(Java Util Logging)|``logging.properties``|
 
-*****Spring Boot官方推荐优先使用带有-spring的文件名作为你的日志配置（如使用logback-spring.xml，而不是logback.xml）*****
+*Spring Boot官方推荐优先使用带有-spring的文件名作为你的日志配置（如使用logback-spring.xml，而不是logback.xml）*
 
 #### logback-spring.xml 配置文件
 ##### 1. 根节点``<configuration>``
@@ -71,7 +71,7 @@ Spring Boot 采用 Commons Logging 作为内部的日志框架,对于日志的�
 &emsp;&emsp;用来设置上下文名称，每个logger都关联到logger上下文,默认上下文名称为default。但可以使用``<contextName>``设置成其他名字,用于区分不同应用程序的记录。一旦设置,不能修改。
 
   例如:
-  
+
   ```XML
   <configuration scan="true" scanPeriod="60 seconds" debug="false">
     <contextName>myAppName</contextName>
@@ -111,6 +111,7 @@ Spring Boot 采用 Commons Logging 作为内部的日志框架,对于日志的�
     - ``<target>``:字符串 System.out(默认)或者 System.err.
 
     例如:
+
 ```XML
 <configuration>
   <appender name="Console" class="ch.qos.logback.core.ConsoleAppender">
@@ -131,18 +132,19 @@ Spring Boot 采用 Commons Logging 作为内部的日志框架,对于日志的�
     - ``<prudent>``：如果是 true，日志会被安全的写入文件，即使其他的FileAppender也在向此文件做写入操作，效率低，默认是 false。
 
     例如:
-  ```XML
-  <configuration>
-    <appender name="fileAppender" class="ch.qos.logback.core.FileAppender">
-        <file>testFile.log</file>
-        <append>true</append>
-        <encoder>
-            <pattern>%-4relative [%thread] %-5level %logger{35} - %msg%n</pattern>
-        </encoder>
-    </appender>
-    <root level="INFO">
-        <appender-ref ref="fileAppender" />
-    </root>
+    
+```XML
+<configuration>
+  <appender name="fileAppender" class="ch.qos.logback.core.FileAppender">
+      <file>testFile.log</file>
+      <append>true</append>
+      <encoder>
+          <pattern>%-4relative [%thread] %-5level %logger{35} - %msg%n</pattern>
+      </encoder>
+  </appender>
+  <root level="INFO">
+      <appender-ref ref="fileAppender" />
+  </root>
 </configuration>
   ```
   - RollingFileAppender: 滚动记录文件,先将日志记录到指定文件，当符合某个条件时,将日志记录到其他文件。有以下子节点：
