@@ -247,58 +247,58 @@ public class SpringBootJpaApplication {
 ```
 1. 只配置root
 
-```XML
-<configuration>
+  ```XML
+  <configuration>
 
-    <appender name="Console" class="ch.qos.logback.core.ConsoleAppender">
-        <encoder>
-            <pattern>%d{HH:mm:ss.SSS} [%thread]  %-5level %logger{36} - %msg%n</pattern>
-        </encoder>
-    </appender>
+      <appender name="Console" class="ch.qos.logback.core.ConsoleAppender">
+          <encoder>
+              <pattern>%d{HH:mm:ss.SSS} [%thread]  %-5level %logger{36} - %msg%n</pattern>
+          </encoder>
+      </appender>
 
-    <root level="INFO">
-        <appender-ref ref="Console" />
-    </root>
-</configuration>
-```
-  - <root level="INFO">将root的打印级别设置为"INFO"，指定了名字为"Console"的appender。
-  - 运行``SpringBootJpaApplication``,root将级别为"INFO"及大于"INFO"的日志信息交给已经配置好的名为"Console"的appender处理,"Console"appender将信息打印到控制台；
-  打印结果如下:
-  
-```Java
-13:35:48.910 [main]  INFO  o.x.s.jpa.SpringBootJpaApplication - 打印INFO信息
-13:35:48.910 [main]  WARN  o.x.s.jpa.SpringBootJpaApplication - 打印WARN信息
-13:35:48.910 [main]  ERROR o.x.s.jpa.SpringBootJpaApplication - 打印ERROR信息
-```
+      <root level="INFO">
+          <appender-ref ref="Console" />
+      </root>
+  </configuration>
+  ```
+    - <root level="INFO">将root的打印级别设置为"INFO"，指定了名字为"Console"的appender。
+    - 运行``SpringBootJpaApplication``,root将级别为"INFO"及大于"INFO"的日志信息交给已经配置好的名为"Console"的appender处理,"Console"appender将信息打印到控制台；
+    打印结果如下:
+
+  ```Java
+  13:35:48.910 [main]  INFO  o.x.s.jpa.SpringBootJpaApplication - 打印INFO信息
+  13:35:48.910 [main]  WARN  o.x.s.jpa.SpringBootJpaApplication - 打印WARN信息
+  13:35:48.910 [main]  ERROR o.x.s.jpa.SpringBootJpaApplication - 打印ERROR信息
+  ```
 2. 带有loger的配置，不指定级别,不指定appender.
 
-```XML
-<configuration>
-    <appender name="Console" class="ch.qos.logback.core.ConsoleAppender">
-        <encoder>
-            <pattern>%d{HH:mm:ss.SSS} [%thread]  %-5level %logger{36} - %msg%n</pattern>
-        </encoder>
-    </appender>
+  ```XML
+  <configuration>
+      <appender name="Console" class="ch.qos.logback.core.ConsoleAppender">
+          <encoder>
+              <pattern>%d{HH:mm:ss.SSS} [%thread]  %-5level %logger{36} - %msg%n</pattern>
+          </encoder>
+      </appender>
 
-    <logger name="org.xiaokui.springboot.jpa"></logger>
+      <logger name="org.xiaokui.springboot.jpa"></logger>
 
-    <root level="INFO">
-        <appender-ref ref="Console" />
-    </root>
-</configuration>
-```
- - ``<logger name="org.xiaokui.springboot.jpa" ></logger>``将控制``org.xiaokui.springboot.jpa``包下的所有类的日志的打印，但是并没用设置打印级别，所以继承他的上级<root>的日志级别"INFO；
- 没有设置addtivity，默认为true，将此loger的打印信息向上级传递；
- 没有设置appender，此loger本身不打印任何信息.
- - <root level="INFO">将root的打印级别设置为"INFO"，指定了名字为"Console"的appender。
- - 运行SpringBootJpaApplication类,因为SpringBootJpaApplication类 在包org.xiaokui.springboot.jpa中，所以首先执行``<logger name="org.xiaokui.springboot.jpa" />``，将级别为"INFO"及大于"INFO"的日志信息传递给root，本身并不打印；
- - root接到下级传递的信息，交给已经配置好的名为"Console"的appender处理，"Console"appender将信息打印到控制台；
- 打印结果如下:
- ```java
-20:54:44.304 [main]  INFO  o.x.s.jpa.SpringBootJpaApplication - 打印INFO信息
-20:54:44.304 [main]  WARN  o.x.s.jpa.SpringBootJpaApplication - 打印WARN信息
-20:54:44.304 [main]  ERROR o.x.s.jpa.SpringBootJpaApplication - 打印ERROR信息
- ```
+      <root level="INFO">
+          <appender-ref ref="Console" />
+      </root>
+  </configuration>
+  ```
+   - ``<logger name="org.xiaokui.springboot.jpa" ></logger>``将控制``org.xiaokui.springboot.jpa``包下的所有类的日志的打印，但是并没用设置打印级别，所以继承他的上级<root>的日志级别"INFO；
+   没有设置addtivity，默认为true，将此loger的打印信息向上级传递；
+   没有设置appender，此loger本身不打印任何信息.
+   - <root level="INFO">将root的打印级别设置为"INFO"，指定了名字为"Console"的appender。
+   - 运行SpringBootJpaApplication类,因为SpringBootJpaApplication类 在包org.xiaokui.springboot.jpa中，所以首先执行``<logger name="org.xiaokui.springboot.jpa" />``，将级别为"INFO"及大于"INFO"的日志信息传递给root，本身并不打印；
+   - root接到下级传递的信息，交给已经配置好的名为"Console"的appender处理，"Console"appender将信息打印到控制台；
+   打印结果如下:
+  ```java
+  20:54:44.304 [main]  INFO  o.x.s.jpa.SpringBootJpaApplication - 打印INFO信息
+  20:54:44.304 [main]  WARN  o.x.s.jpa.SpringBootJpaApplication - 打印WARN信息
+  20:54:44.304 [main]  ERROR o.x.s.jpa.SpringBootJpaApplication - 打印ERROR信息
+  ```
 3. 带有多个loger的配置，指定级别,指定appender
 
 ```XML
