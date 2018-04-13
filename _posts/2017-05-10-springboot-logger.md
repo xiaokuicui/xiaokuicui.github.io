@@ -220,7 +220,7 @@ Spring Boot 采用 Commons Logging 作为内部的日志框架,对于日志的�
 - level:用来设置打印级别，大小写无关：TRACE, DEBUG, INFO, WARN, ERROR,不能设置为INHERITED或者同义词NULL。默认是DEBUG。
 ``<root>``可以包含零个或多个<appender-ref>元素，标识这个appender将会添加到这个loger。
 
-###### 举例说明
+**举例说明**
 ```java
 package org.xiaokui.springboot.jpa;
 
@@ -269,6 +269,7 @@ public class SpringBootJpaApplication {
 13:35:48.910 [main]  WARN  o.x.s.jpa.SpringBootJpaApplication - 打印WARN信息
 13:35:48.910 [main]  ERROR o.x.s.jpa.SpringBootJpaApplication - 打印ERROR信息
   ```
+
 2. 带有loger的配置，不指定级别,不指定appender.
 
 ```XML
@@ -299,6 +300,7 @@ public class SpringBootJpaApplication {
 20:54:44.304 [main]  WARN  o.x.s.jpa.SpringBootJpaApplication - 打印WARN信息
 20:54:44.304 [main]  ERROR o.x.s.jpa.SpringBootJpaApplication - 打印ERROR信息
  ```
+ 
 3. 带有多个loger的配置，指定级别,指定appender
 
 ```XML
