@@ -132,7 +132,7 @@ Spring Boot 采用 Commons Logging 作为内部的日志框架,对于日志的�
     - ``<prudent>``：如果是 true，日志会被安全的写入文件，即使其他的FileAppender也在向此文件做写入操作，效率低，默认是 false。
 
     例如:
-    
+
 ```XML
 <configuration>
   <appender name="fileAppender" class="ch.qos.logback.core.FileAppender">
@@ -183,9 +183,10 @@ Spring Boot 采用 Commons Logging 作为内部的日志框架,对于日志的�
      </configuration>
      ```
      例如：按照固定窗口模式生成日志文件，当文件大于20MB时，生成新的日志文件。窗口大小是1到3，当保存了3个归档文件后，将覆盖最早的日志。
-   ```XML
-   <configuration>
-  <appender name="fileAppender" class="ch.qos.logback.core.FileAppender">
+
+    ```XML
+    <configuration>
+    <appender name="fileAppender" class="ch.qos.logback.core.FileAppender">
       <file>test.log</file>
 
       <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
@@ -200,12 +201,12 @@ Spring Boot 采用 Commons Logging 作为内部的日志框架,对于日志的�
       <encoder>
           <pattern>%-4relative [%thread] %-5level %logger{35} - %msg%n</pattern>
       </encoder>
-  </appender>
-  <root level="INFO">
+    </appender>
+    <root level="INFO">
       <appender-ref ref="fileAppender" />
-  </root>
-</configuration>
-   ```
+    </root>
+    </configuration>
+    ```
 
   - 其他Appender:还有SocketAppender、SMTPAppender、DBAppender(记录日志到数据库)、SyslogAppender、SiftingAppender具体配置可参考[官方文档](https://logback.qos.ch/documentation.html)
 
@@ -245,6 +246,7 @@ public class SpringBootJpaApplication {
 
 ```
 1. 只配置root
+
 ```XML
 <configuration>
 
@@ -257,7 +259,6 @@ public class SpringBootJpaApplication {
     <root level="INFO">
         <appender-ref ref="Console" />
     </root>
-
 </configuration>
 ```
   - <root level="INFO">将root的打印级别设置为"INFO"，指定了名字为"Console"的appender。
