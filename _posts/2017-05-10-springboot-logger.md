@@ -221,6 +221,7 @@ Spring Boot 采用 Commons Logging 作为内部的日志框架,对于日志的�
 ``<root>``可以包含零个或多个<appender-ref>元素，标识这个appender将会添加到这个loger。
 
 **举例说明**
+
     ```java
     package org.xiaokui.springboot.jpa;
 
@@ -294,6 +295,7 @@ Spring Boot 采用 Commons Logging 作为内部的日志框架,对于日志的�
      - root接到下级传递的信息，交给已经配置好的名为"Console"的appender处理，"Console"appender将信息打印到控制台;
 
      打印结果如下:
+     
     ```java
     20:54:44.304 [main]  INFO  o.x.s.jpa.SpringBootJpaApplication - 打印INFO信息
     20:54:44.304 [main]  WARN  o.x.s.jpa.SpringBootJpaApplication - 打印WARN信息
@@ -334,6 +336,7 @@ Spring Boot 采用 Commons Logging 作为内部的日志框架,对于日志的�
   - ``<logger name="org.xiaokui.springboot.jpa"/>``未接到任何打印信息，当然也不会给它的上级root传递任何打印信息;
 
   打印结果如下:
+
     ```java
     21:01:56.706 [main]  WARN  o.x.s.jpa.SpringBootJpaApplication - 打印WARN信息
     21:01:56.706 [main]  ERROR o.x.s.jpa.SpringBootJpaApplication - 打印ERROR信息
@@ -341,6 +344,7 @@ Spring Boot 采用 Commons Logging 作为内部的日志框架,对于日志的�
   如果将``<logger name="org.xiaokui.springboot.jpa.SpringBootJpaApplication" level="WARN" additivity="false">``修改为 ``<logger name="org.xiaokui.springboot.jpa.SpringBootJpaApplication" level="WARN" additivity="true">``则打印信息向上级传递，logger本身打印一次，root接到后又打印一次.
 
   打印结果如下:
+
     ```java
     21:07:30.162 [main]  WARN  o.x.s.jpa.SpringBootJpaApplication - 打印WARN信息
     21:07:30.162 [main]  WARN  o.x.s.jpa.SpringBootJpaApplication - 打印WARN信息
