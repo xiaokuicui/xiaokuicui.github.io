@@ -245,6 +245,7 @@ Spring Boot 采用 Commons Logging 作为内部的日志框架,对于日志的�
     	}
     }
     ```
+    
 1. 只配置root
 
     ```XML
@@ -295,7 +296,7 @@ Spring Boot 采用 Commons Logging 作为内部的日志框架,对于日志的�
      - root接到下级传递的信息，交给已经配置好的名为"Console"的appender处理，"Console"appender将信息打印到控制台;
 
      打印结果如下:
-     
+
     ```java
     20:54:44.304 [main]  INFO  o.x.s.jpa.SpringBootJpaApplication - 打印INFO信息
     20:54:44.304 [main]  WARN  o.x.s.jpa.SpringBootJpaApplication - 打印WARN信息
