@@ -245,7 +245,6 @@ Spring Boot 采用 Commons Logging 作为内部的日志框架,对于日志的�
   }
   ```
 1. 只配置root
-
   ```XML
   <configuration>
       <appender name="Console" class="ch.qos.logback.core.ConsoleAppender">
@@ -269,7 +268,6 @@ Spring Boot 采用 Commons Logging 作为内部的日志框架,对于日志的�
   13:35:48.910 [main]  ERROR o.x.s.jpa.SpringBootJpaApplication - 打印ERROR信息
   ```
 2. 带有loger的配置，不指定级别,不指定appender.
-
   ```XML
   <configuration>
       <appender name="Console" class="ch.qos.logback.core.ConsoleAppender">
@@ -298,7 +296,6 @@ Spring Boot 采用 Commons Logging 作为内部的日志框架,对于日志的�
   20:54:44.304 [main]  ERROR o.x.s.jpa.SpringBootJpaApplication - 打印ERROR信息
   ```
 3. 带有多个loger的配置，指定级别,指定appender
-
   ```XML
   <configuration>
 
