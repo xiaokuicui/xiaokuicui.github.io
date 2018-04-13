@@ -222,30 +222,30 @@ Spring Boot 采用 Commons Logging 作为内部的日志框架,对于日志的�
 
 **举例说明**
 
-    ```java
-    package org.xiaokui.springboot.jpa;
+  ```java
+  package org.xiaokui.springboot.jpa;
 
-    import org.slf4j.Logger;
-    import org.slf4j.LoggerFactory;
-    import org.springframework.boot.SpringApplication;
-    import org.springframework.boot.autoconfigure.SpringBootApplication;
+  import org.slf4j.Logger;
+  import org.slf4j.LoggerFactory;
+  import org.springframework.boot.SpringApplication;
+  import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-    @SpringBootApplication
-    public class SpringBootJpaApplication {
+  @SpringBootApplication
+  public class SpringBootJpaApplication {
 
-    	private final static Logger logger = LoggerFactory.getLogger(SpringBootJpaApplication.class);
+  	private final static Logger logger = LoggerFactory.getLogger(SpringBootJpaApplication.class);
 
-    	public static void main(String[] args) {
-    		SpringApplication.run(SpringBootJpaApplication.class, args);
-    		logger.trace("打印TRACE信息");
-    		logger.debug("打印DEBUG信息");
-    		logger.info("打印INFO信息");
-    		logger.warn("打印WARN信息");
-    		logger.error("打印ERROR信息");
-    	}
-    }
-    ```
-    
+  	public static void main(String[] args) {
+  		SpringApplication.run(SpringBootJpaApplication.class, args);
+  		logger.trace("打印TRACE信息");
+  		logger.debug("打印DEBUG信息");
+  		logger.info("打印INFO信息");
+  		logger.warn("打印WARN信息");
+  		logger.error("打印ERROR信息");
+  	}
+  }
+  ```
+
 1. 只配置root
 
     ```XML
@@ -261,6 +261,7 @@ Spring Boot 采用 Commons Logging 作为内部的日志框架,对于日志的�
         </root>
     </configuration>
     ```
+
     - <root level="INFO">将root的打印级别设置为"INFO"，指定了名字为"Console"的appender。
     - 运行``SpringBootJpaApplication``,root将级别为"INFO"及大于"INFO"的日志信息交给已经配置好的名为"Console"的appender处理,"Console"appender将信息打印到控制台；
 
@@ -338,17 +339,18 @@ Spring Boot 采用 Commons Logging 作为内部的日志框架,对于日志的�
 
   打印结果如下:
 
-    ```java
-    21:01:56.706 [main]  WARN  o.x.s.jpa.SpringBootJpaApplication - 打印WARN信息
-    21:01:56.706 [main]  ERROR o.x.s.jpa.SpringBootJpaApplication - 打印ERROR信息
-    ```
+  ```java
+  21:01:56.706 [main]  WARN  o.x.s.jpa.SpringBootJpaApplication - 打印WARN信息
+  21:01:56.706 [main]  ERROR o.x.s.jpa.SpringBootJpaApplication - 打印ERROR信息
+  ```
+
   如果将``<logger name="org.xiaokui.springboot.jpa.SpringBootJpaApplication" level="WARN" additivity="false">``修改为 ``<logger name="org.xiaokui.springboot.jpa.SpringBootJpaApplication" level="WARN" additivity="true">``则打印信息向上级传递，logger本身打印一次，root接到后又打印一次.
 
   打印结果如下:
 
-    ```java
-    21:07:30.162 [main]  WARN  o.x.s.jpa.SpringBootJpaApplication - 打印WARN信息
-    21:07:30.162 [main]  WARN  o.x.s.jpa.SpringBootJpaApplication - 打印WARN信息
-    21:07:30.163 [main]  ERROR o.x.s.jpa.SpringBootJpaApplication - 打印ERROR信息
-    21:07:30.163 [main]  ERROR o.x.s.jpa.SpringBootJpaApplication - 打印ERROR信息
-    ```
+  ```java
+  21:07:30.162 [main]  WARN  o.x.s.jpa.SpringBootJpaApplication - 打印WARN信息
+  21:07:30.162 [main]  WARN  o.x.s.jpa.SpringBootJpaApplication - 打印WARN信息
+  21:07:30.163 [main]  ERROR o.x.s.jpa.SpringBootJpaApplication - 打印ERROR信息
+  21:07:30.163 [main]  ERROR o.x.s.jpa.SpringBootJpaApplication - 打印ERROR信息
+  ```
