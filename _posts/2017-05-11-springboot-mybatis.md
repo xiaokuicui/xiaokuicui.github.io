@@ -1,14 +1,15 @@
 ---
 layout: post
-title: Spring Boot学习笔记-集成MyBatis,分页插件PageHelper, 通用Mapper
+title: 'Spring Boot学习笔记-集成MyBatis,分页插件PageHelper, 通用Mapper'
 categories: SpringBoot
 ---
+
 Spring Boot 整合 MyBatis 实现数据存储.并结合通用 Mapper、Mybatis Geneator 以及分页 PageHelper 来打造适合企业开发的模板框架.
 
-## Mybatis POM 依赖
+# Mybatis POM 依赖
 
-- 引入整合 myBatis 的核心依赖 ``mybatis-spring-boot-starter``,可以不添加 ``spring-boot-starter-jdbc``.因为 ``mybatis-spring-boot-starter`` 依赖中存在 ``spring-boot-starter-jdbc``.
-- 引入连接 mysql 的必要依赖``mysql-connector-java``.
+- 引入整合 myBatis 的核心依赖 `mybatis-spring-boot-starter`,可以不添加 `spring-boot-starter-jdbc`.因为 `mybatis-spring-boot-starter` 依赖中存在 `spring-boot-starter-jdbc`.
+- 引入连接 mysql 的必要依赖`mysql-connector-java`.
 
 ```java
 <dependency>
@@ -23,33 +24,37 @@ Spring Boot 整合 MyBatis 实现数据存储.并结合通用 Mapper、Mybatis G
 </dependency>
 ```
 
-添加了 ``mybatis-spring-boot-starter`` 之后, Spring Boot 会自动加载 ``spring.datasource.*``相关配置(``application.properties``中配置);自动创建使用该 DataSource 的 ``SqlSessionFactoryBean`` 以及 ``SqlSessionTemplate``;自动扫描 Mappers 连接到 ``SqlSessionTemplate`` 并注册到 Spring 上下文中.
+添加了 `mybatis-spring-boot-starter` 之后, Spring Boot 会自动加载 `spring.datasource.*`相关配置(`application.properties`中配置);自动创建使用该 DataSource 的 `SqlSessionFactoryBean` 以及 `SqlSessionTemplate`;自动扫描 Mappers 连接到 `SqlSessionTemplate` 并注册到 Spring 上下文中.
 
-在启动类中添加对 mapper 包扫描 ``@MapperScan``
-```Java
+在启动类中添加对 mapper 包扫描 `@MapperScan`
+
+```java
 @SpringBootApplication
 @MapperScan("com.neo.mapper")
 public class Application {
 
-	public static void main(String[] args) {
-		SpringApplication.run(Application.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(Application.class, args);
+    }
 }
 ```
 
-## 数据源配置
+# 数据源配置
 
 在 src/main/resources/application.properties 中配置数据源信息.
-```Java
+
+```java
 spring.datasource.driver-class-name = com.mysql.jdbc.Driver
 spring.datasource.url  =jdbc:mysql://localhost:3306/spring-boot?useUnicode=true&characterEncoding=utf-8
 spring.datasource.username = root
 spring.datasource.password = root
 ```
+
 Spring Boot 2.0 默认使用的数据连接池是**HikariCP连接池**.
 
-## SQL 脚本初始化
-``` mysql
+# SQL 脚本初始化
+
+```mysql
 CREATE DATABASE `spring-boot-test`;
 
 USE `spring-boot-test`;
@@ -66,12 +71,13 @@ CREATE TABLE `t_user` (
 ) ENGINE=InnoDB COMMENT '用户表';
 ```
 
-## 集成 MyBatis
+# 集成 MyBatis
 
-### 方案一 通过注解的方式
+## 方案一 通过注解的方式
 
-##### 实体对象
-```Java
+### 实体对象
+
+```java
 /**
  * @author xiaokui
  * @Description:
@@ -93,10 +99,11 @@ public class User implements Serializable {
 
     // 省略getter和setter
 }
-
 ```
-##### Mapper相关
-```Java
+
+### Mapper相关
+
+```java
 @Component //Component注解不添加也没事，只是不加service那边引入UserMapper会有错误提示，但不影响
 public interface UserMapper {
 
@@ -115,11 +122,11 @@ public interface UserMapper {
     @Select("select id,user_name,user_description,gmt_create from t_user where id = #{id}")
     User getUserById(Long id);
 }
-
 ```
 
-##### Service相关
-```Java
+### Service相关
+
+```java
 public interface UserService {
 
     int add(User user);
@@ -132,11 +139,13 @@ public interface UserService {
 
     User getUserById(Long id);
 }
-
 ```
-##### Controller 相关
+
+### Controller 相关
+
 定义一组 RESTful API 接口进行测试
-```Java
+
+```java
 @RestController
 @RequestMapping(value = "/users")
 @Api(value = "/users",description = "用户管理")
@@ -168,15 +177,15 @@ public class UserController {
         return map;
     }
 }
-
 ```
-### 方案二 通过XML的方式
 
-##### 配置相关
+## 方案二 通过XML的方式
 
-在 ``src/main/resources/mapper`` 路径下创建``UserMapper.xml``文件.标明映射的 Mapper 类、JavaBean 及 SQL.
+### 配置相关
 
-``` xml
+在 `src/main/resources/mapper` 路径下创建`UserMapper.xml`文件.标明映射的 Mapper 类、JavaBean 及 SQL.
+
+```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
@@ -194,7 +203,7 @@ public class UserController {
 </mapper>
 ```
 
-在``src/main/resources/application.properties`` 中配置映射文件的路径.
+在`src/main/resources/application.properties` 中配置映射文件的路径.
 
 ```xml
 #指定映射文件
@@ -203,18 +212,20 @@ mybatis.mapperLocations=classpath:mapper/*.xml
 mybatis.type-aliases-package=org.xiaokui.springboot.mybatis.domain
 ```
 
+### Mapper相关
 
-##### Mapper相关
-新建``UserMapper2.java``接口类,无需相关实现类
+新建`UserMapper2.java`接口类,无需相关实现类
 
-```Java
+```java
 @Component
 public interface UserMapper2 {
 
     User findUserById(Long id);
 }
 ```
-##### Controller相关
+
+### Controller相关
+
 ```java
 @RestController
 @RequestMapping(value = "/users2")
@@ -237,7 +248,8 @@ public class UserController2 {
 }
 ```
 
-## 集成通用 Mapper、分页插件 PageHelper 依赖
+# 集成通用 Mapper、分页插件 PageHelper 依赖
+
 ```xml
 <!--通用mapper-->
 <dependency>
@@ -258,30 +270,32 @@ public class UserController2 {
 <artifactId>mybatis-generator-maven-plugin</artifactId>
 <version>1.3.2</version>
 <dependencies>
-	<dependency>
-		<groupId>mysql</groupId>
-		<artifactId>mysql-connector-java</artifactId>
-		<version>${mysql.version}</version>
-	</dependency>
-	<dependency>
-		<groupId>tk.mybatis</groupId>
-		<artifactId>mapper-generator</artifactId>
-		<version>1.0.0</version>
-	</dependency>
+    <dependency>
+        <groupId>mysql</groupId>
+        <artifactId>mysql-connector-java</artifactId>
+        <version>${mysql.version}</version>
+    </dependency>
+    <dependency>
+        <groupId>tk.mybatis</groupId>
+        <artifactId>mapper-generator</artifactId>
+        <version>1.0.0</version>
+    </dependency>
 </dependencies>
 <configuration>
-	<configurationFile>${basedir}/src/main/resources/generator/generatorConfig.xml</configurationFile>
-	<overwrite>true</overwrite>
-	<verbose>true</verbose>
+    <configurationFile>${basedir}/src/main/resources/generator/generatorConfig.xml</configurationFile>
+    <overwrite>true</overwrite>
+    <verbose>true</verbose>
 </configuration>
 </plugin>
 ```
-引入了``mybatis-generator-maven-plugin``插件,详细的配置可参考 [官方MyBatis Generator中文文档](http://mbg.cndocs.ml/running/runningWithMaven.html)
 
-## MyBatis Generator 配置
-在``src/main/resources/generator``路径下新建``generatorConfig.xml``文件,加入以下内容:
+引入了`mybatis-generator-maven-plugin`插件,详细的配置可参考 [官方MyBatis Generator中文文档](http://mbg.cndocs.ml/running/runningWithMaven.html)
 
-```XML
+# MyBatis Generator 配置
+
+在`src/main/resources/generator`路径下新建`generatorConfig.xml`文件,加入以下内容:
+
+```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE generatorConfiguration
         PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
@@ -327,102 +341,111 @@ public class UserController2 {
     </context>
 </generatorConfiguration>
 ```
-``tk.mybatis.mapper.generator.MapperPlugin``用来指定继承通用 Mapper 的接口.生成的 Mapper 会继承这个类.
-运行命令:``mvn mybatis-generator:generate``.就会自动生成表对应的 Model,Mappe 以及 XML.
 
-## 通用 Mapper 配置
-通用 Mapper 可以极大的方便开发人员,对单表封装了许多通用方法，省掉自己写增删改查的sql.
-实现一个接口继承通用的 Mapper.
+`tk.mybatis.mapper.generator.MapperPlugin`用来指定继承通用 Mapper 的接口.生成的 Mapper 会继承这个类. 运行命令:`mvn mybatis-generator:generate`.就会自动生成表对应的 Model,Mappe 以及 XML.
+
+# 通用 Mapper 配置
+
+通用 Mapper 可以极大的方便开发人员,对单表封装了许多通用方法，省掉自己写增删改查的sql. 实现一个接口继承通用的 Mapper.
+
 ```java
 public interface MyMapper<T> extends Mapper<T>,MySqlMapper<T> {
     //TODO
     //FIXME 特别注意，该接口不能被扫描到，否则会出错
 }
 ```
-1. 在``src/main/resources/application.properties``加入以下内容
-```properties
-# 指定javabean所在包
-mybatis.type-aliases-package=org.xiaokui.springboot.mybatis.domain
-# 指定映射文件
-mybatis.mapper-locations=classpath:mapper/*.xml
-# mappers 多个接口时逗号隔开
-mapper.mappers=org.xiaokui.springboot.mybatis.common.MyMapper
-mapper.not-empty=false
-mapper.identity=MYSQL
-# pagehelper
-pagehelper.helperDialect=mysql
-pagehelper.reasonable=true
-pagehelper.supportMethodsArguments=true
-pagehelper.params=count=countSql
-```
+
+1. 在`src/main/resources/application.properties`加入以下内容
+
+  ```properties
+  # 指定javabean所在包
+  mybatis.type-aliases-package=org.xiaokui.springboot.mybatis.domain
+  # 指定映射文件
+  mybatis.mapper-locations=classpath:mapper/*.xml
+  # mappers 多个接口时逗号隔开
+  mapper.mappers=org.xiaokui.springboot.mybatis.common.MyMapper
+  mapper.not-empty=false
+  mapper.identity=MYSQL
+  # pagehelper
+  pagehelper.helperDialect=mysql
+  pagehelper.reasonable=true
+  pagehelper.supportMethodsArguments=true
+  pagehelper.params=count=countSql
+  ```
+
 2. Server层
-```java
-@Service
-public class CountryServiceImpl implements CountryService {
 
-    @Autowired
-    private CountryMapper countryMapper;
+  ```java
+  @Service
+  public class CountryServiceImpl implements CountryService {
 
-    @Override
-    public List<Country> getAll(Country country) {
-        if (country.getPage() != null && country.getRows() != null) {
-            PageHelper.startPage(country.getPage(), country.getRows());
-        }
-        return countryMapper.selectAll();
-    }
+   @Autowired
+   private CountryMapper countryMapper;
 
-    @Override
-    public Country getById(Long id) {
-        return countryMapper.selectByPrimaryKey(id);
-    }
+   @Override
+   public List<Country> getAll(Country country) {
+       if (country.getPage() != null && country.getRows() != null) {
+           PageHelper.startPage(country.getPage(), country.getRows());
+       }
+       return countryMapper.selectAll();
+   }
 
-    @Override
-    public void deleteById(Long id) {
-         countryMapper.deleteByPrimaryKey(id);
-    }
+   @Override
+   public Country getById(Long id) {
+       return countryMapper.selectByPrimaryKey(id);
+   }
 
-    @Override
-    public void save(Country country) {
-        if(country.getId() != null){
-            countryMapper.updateByPrimaryKey(country);
-        }else {
-            countryMapper.insert(country);
-        }
-    }
-}
-```
+   @Override
+   public void deleteById(Long id) {
+        countryMapper.deleteByPrimaryKey(id);
+   }
+
+   @Override
+   public void save(Country country) {
+       if(country.getId() != null){
+           countryMapper.updateByPrimaryKey(country);
+       }else {
+           countryMapper.insert(country);
+       }
+   }
+  }
+  ```
+
 3. Controller 层
-```java
-@RestController
-@RequestMapping(value = "/countries")
-@Api(value = "/countries",description = "国家管理")
-public class CountryController {
 
-    @Autowired
-    private CountryService countryService;
+  ```java
+  @RestController
+  @RequestMapping(value = "/countries")
+  @Api(value = "/countries",description = "国家管理")
+  public class CountryController {
 
-    @ApiOperation(value = "获取国家列表",notes = "查询国家列表")
-    @ApiImplicitParam(name = "county",value = "County实体",required = false,dataType = "country")
-    @RequestMapping(value = "/list",method = RequestMethod.GET,produces = "application/json")
-    public Map<String,Object> getAll(@RequestBody Country country){
-        Map<String,Object> map = new HashMap<>();
-        List<Country> list = countryService.getAll(country);
-        map.put("code","0");
-        map.put("data",new PageInfo<Country>(list));
-        map.put("message","成功");
-        return map;
-    }
-}
-```
+   @Autowired
+   private CountryService countryService;
 
-注意:使用通用 Mapper,``Application.java``中引入``@MapperScan``的时候要选择``@tk.mybatis.spring.annotation.MapperScan``
+   @ApiOperation(value = "获取国家列表",notes = "查询国家列表")
+   @ApiImplicitParam(name = "county",value = "County实体",required = false,dataType = "country")
+   @RequestMapping(value = "/list",method = RequestMethod.GET,produces = "application/json")
+   public Map<String,Object> getAll(@RequestBody Country country){
+       Map<String,Object> map = new HashMap<>();
+       List<Country> list = countryService.getAll(country);
+       map.put("code","0");
+       map.put("data",new PageInfo<Country>(list));
+       map.put("message","成功");
+       return map;
+   }
+  }
+  ```
 
-运行``Application.java`` 打开浏览器在 http://localhost:8080/swagger-ui.html 页面进行测试.
+注意:使用通用 Mapper,`Application.java`中引入`@MapperScan`的时候要选择`@tk.mybatis.spring.annotation.MapperScan`
 
------
-## [示例代码](https://github.com/xiaokuicui/spring-boot-cloud-learning-examples/tree/master/spring-boot-mybatis)
+运行`Application.java` 打开浏览器在 <http://localhost:8080/swagger-ui.html> 页面进行测试.
 
-## 参考文档
-  - [MyBatis官方中文参考文档](http://www.mybatis.org/mybatis-3/zh/index.html)
-  - [MyBatis-Generator官方中文文档](http://mbg.cndocs.ml/)
-  - [通过Mapper作者GitHub地址](https://github.com/abel533)
+--------------------------------------------------------------------------------
+
+# [示例代码](https://github.com/xiaokuicui/spring-boot-cloud-learning-examples/tree/master/spring-boot-mybatis)
+
+# 参考文档
+
+- [MyBatis官方中文参考文档](http://www.mybatis.org/mybatis-3/zh/index.html)
+- [MyBatis-Generator官方中文文档](http://mbg.cndocs.ml/)
+- [通过Mapper作者GitHub地址](https://github.com/abel533)

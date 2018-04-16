@@ -4,15 +4,18 @@ title: Spring Boot学习笔记-配置文件
 categories: SpringBoot
 ---
 
-Spring Boot 使用了一个全局的配置文件 ``application.properties``或``application.yml``.放在 ``src/main/resources`` 目录下或者类路径的``/config``下。Sping Boot的全局配置文件的作用是对一些默认配置的配置值进行修改.
-关于Spring Boot 的默认配置可参考:[常用应用程序属性](https://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html)
+Spring Boot 使用了一个全局的配置文件 `application.properties`或`application.yml`.放在 `src/main/resources` 目录下或者类路径的`/config`下。Sping Boot的全局配置文件的作用是对一些默认配置的配置值进行修改. 关于Spring Boot 的默认配置可参考:[常用应用程序属性](https://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html)
 
-## 获取自定义属性的值
+# 获取自定义属性的值
+
 我们在进行web开发的时候,通常需要获取配置文件中的值,比如说有以下内容:
+
 ```properties
 author.name=xiaokui
 ```
-可以通过``@Value("${属性名}")``注解来加载对应的配置属性,通过单元测试验证.
+
+可以通过`@Value("${属性名}")`注解来加载对应的配置属性,通过单元测试验证.
+
 ```java
 public class PropertiesTest{
       @Value("${author.name}")
@@ -23,7 +26,9 @@ public class PropertiesTest{
       }
 }
 ```
-## 随机数配置
+
+# 随机数配置
+
 ```properties
 # 随机字符串
 org.xiaokui.random.string=${random.value}
@@ -36,7 +41,9 @@ org.xiaokui.random.test1=${random.int(10)}
 # 10-20的随机数
 org.xiaokui.random.test2=${random.int[10,20]}
 ```
+
 单元测试用例:
+
 ```java
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -73,26 +80,30 @@ public class PropertiesTests {
 }
 ```
 
-## 多环境配置
- 我们在开发web应用时,通常同一套程序会被安装到几个不同环境,比如：开发、测试、生产等。其中每个环境的数据库地址、服务器端口等配置都会不同，如果在为不同环境打包时都要频繁修改配置文件的话，那必将是个非常繁琐且容易发生错误的事。
+# 多环境配置
 
- 在 Spring Boot 中多环境配置文件名需要满足``application-{profile}.properties``的格式，其中{profile}对应你的环境标识，比如：
+我们在开发web应用时,通常同一套程序会被安装到几个不同环境,比如：开发、测试、生产等。其中每个环境的数据库地址、服务器端口等配置都会不同，如果在为不同环境打包时都要频繁修改配置文件的话，那必将是个非常繁琐且容易发生错误的事。
 
- - 开发环境:``application-dev.properties``
- - 测试环境:``application-test.properties``
- - 生产环境:``application-pro.properties``
+在 Spring Boot 中多环境配置文件名需要满足`application-{profile}.properties`的格式，其中{profile}对应你的环境标识，比如：
 
- 至于哪个具体的配置文件会被加载，需要在``application.properties``文件中通过``spring.profiles.active``属性来设置，其值对应{profile}值。
+- 开发环境:`application-dev.properties`
+- 测试环境:`application-test.properties`
+- 生产环境:`application-pro.properties`
 
-## YAML文件
-相对于属性文件,YAML 文件是一个更好的配置文件格式。Spring Boot 提供的 SpringApplication 类也提供了对 YAML 配置文件的支持。
-在``src/main/resources``创建 application.yml 文件
-```YAML
+  至于哪个具体的配置文件会被加载，需要在`application.properties`文件中通过`spring.profiles.active`属性来设置，其值对应{profile}值。
+
+# YAML文件
+
+相对于属性文件,YAML 文件是一个更好的配置文件格式。Spring Boot 提供的 SpringApplication 类也提供了对 YAML 配置文件的支持。 在`src/main/resources`创建 application.yml 文件
+
+```yaml
 author:
  name: xiaokui
  blog: http://www.xiaokui.org
 ```
+
 使用单元测试验证
+
 ```java
 public class PropertiesTest{
       @Value("${author.name}")
