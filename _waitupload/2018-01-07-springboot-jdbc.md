@@ -1,8 +1,12 @@
 ---
 layout: post
-title: Spring Boot学习笔记-数据访问与多数据源配置
+title: Spring Boot学习笔记-集成JdbcTemplate实现druid多数据源配置
 categories: SpringBoot
 ---
+
+Spring Boot 2.0 默认使用的数据连接池是**HikariCP连接池**.
+
+# HikariCP连接池
 
 # Druid 连接池
 

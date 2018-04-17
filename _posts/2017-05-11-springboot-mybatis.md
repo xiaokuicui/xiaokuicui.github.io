@@ -50,8 +50,6 @@ spring.datasource.username = root
 spring.datasource.password = root
 ```
 
-Spring Boot 2.0 默认使用的数据连接池是**HikariCP连接池**.
-
 # SQL 脚本初始化
 
 ```mysql
@@ -379,35 +377,35 @@ public interface MyMapper<T> extends Mapper<T>,MySqlMapper<T> {
   @Service
   public class CountryServiceImpl implements CountryService {
 
-   @Autowired
-   private CountryMapper countryMapper;
+  @Autowired
+  private CountryMapper countryMapper;
 
-   @Override
-   public List<Country> getAll(Country country) {
-       if (country.getPage() != null && country.getRows() != null) {
-           PageHelper.startPage(country.getPage(), country.getRows());
-       }
-       return countryMapper.selectAll();
-   }
+  @Override
+  public List<Country> getAll(Country country) {
+      if (country.getPage() != null && country.getRows() != null) {
+          PageHelper.startPage(country.getPage(), country.getRows());
+      }
+      return countryMapper.selectAll();
+  }
 
-   @Override
-   public Country getById(Long id) {
-       return countryMapper.selectByPrimaryKey(id);
-   }
+  @Override
+  public Country getById(Long id) {
+      return countryMapper.selectByPrimaryKey(id);
+  }
 
-   @Override
-   public void deleteById(Long id) {
-        countryMapper.deleteByPrimaryKey(id);
-   }
+  @Override
+  public void deleteById(Long id) {
+       countryMapper.deleteByPrimaryKey(id);
+  }
 
-   @Override
-   public void save(Country country) {
-       if(country.getId() != null){
-           countryMapper.updateByPrimaryKey(country);
-       }else {
-           countryMapper.insert(country);
-       }
-   }
+  @Override
+  public void save(Country country) {
+      if(country.getId() != null){
+          countryMapper.updateByPrimaryKey(country);
+      }else {
+          countryMapper.insert(country);
+      }
+  }
   }
   ```
 
@@ -419,20 +417,20 @@ public interface MyMapper<T> extends Mapper<T>,MySqlMapper<T> {
   @Api(value = "/countries",description = "国家管理")
   public class CountryController {
 
-   @Autowired
-   private CountryService countryService;
+  @Autowired
+  private CountryService countryService;
 
-   @ApiOperation(value = "获取国家列表",notes = "查询国家列表")
-   @ApiImplicitParam(name = "county",value = "County实体",required = false,dataType = "country")
-   @RequestMapping(value = "/list",method = RequestMethod.GET,produces = "application/json")
-   public Map<String,Object> getAll(@RequestBody Country country){
-       Map<String,Object> map = new HashMap<>();
-       List<Country> list = countryService.getAll(country);
-       map.put("code","0");
-       map.put("data",new PageInfo<Country>(list));
-       map.put("message","成功");
-       return map;
-   }
+  @ApiOperation(value = "获取国家列表",notes = "查询国家列表")
+  @ApiImplicitParam(name = "county",value = "County实体",required = false,dataType = "country")
+  @RequestMapping(value = "/list",method = RequestMethod.GET,produces = "application/json")
+  public Map<String,Object> getAll(@RequestBody Country country){
+      Map<String,Object> map = new HashMap<>();
+      List<Country> list = countryService.getAll(country);
+      map.put("code","0");
+      map.put("data",new PageInfo<Country>(list));
+      map.put("message","成功");
+      return map;
+  }
   }
   ```
 

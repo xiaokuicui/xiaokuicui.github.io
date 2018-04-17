@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Spring Boot学习笔记-集成Thymeleaf、FreeMarker开发web应用
+title: Spring Boot学习笔记-集成Thymeleaf、FreeMarker开发web应用(使用devtools实现热部署)
 categories: SpringBoot
 ---
 

@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Spring Boot学习笔记-集成Spring-Data-JPA
+title: Spring Boot学习笔记-集成spring-data-jpa
 categories: SpringBoot
 ---
 
@@ -22,8 +22,7 @@ Spring Data JPA 是 Spring 基于 ORM 框架、JPA 规范的基础上封装的�
 
 ## 实体对象
 
-```java
-```
+`java`
 
 # 参考链接
 
