@@ -108,9 +108,9 @@ _Spring Boot官方推荐优先使用带有-spring的文件名作为你的日志�
   　</configuration>
   ```
 
-  ##### 4\. 子节点`<timestamp>`:
+#### 4\. 子节点`<timestamp>`:
 
-  获取时间戳字符串,他有两个属性key和datePattern.
+获取时间戳字符串,他有两个属性key和datePattern.
 
 - key:标识此
 
@@ -128,9 +128,9 @@ _Spring Boot官方推荐优先使用带有-spring的文件名作为你的日志�
   　</configuration>
   ```
 
-  ##### 5\. 子节点`<appender>`:
+#### 5\. 子节点`<appender>`:
 
-  负责写日志的组件,它有两个必要属性name和class。name指定appender名称，class指定appender的全限定名.
+负责写日志的组件,它有两个必要属性name和class。name指定appender名称，class指定appender的全限定名.
 
 - ConsoleAppender:把日志添加到控制台，有以下子节点：
 
@@ -260,9 +260,10 @@ _Spring Boot官方推荐优先使用带有-spring的文件名作为你的日志�
 - level 用来设置打印级别（日志级别),大小写无关：TRACE, DEBUG, INFO, WARN, ERROR,还有一个特俗值INHERITED或者同义词NULL，代表强制执行上级的级别。如果未设置此属性，那么当前loger将会继承上级的级别。
 - addtivity:是否向上级loger传递打印信息。默认是true
 
-  ##### 7\. 子节点`<root>`:
+#### 7\. 子节点`<root>`:
 
-   也是`<loger>`元素,但它是根`loger`,是所有`<loger>`的上级.只有一个level属性，因为name已经被命名为`root`,且已经是最上级了。
+也是`<loger>`元素,但它是根`loger`,是所有`<loger>`的上级.只有一个level属性，因为name已经被命名为`root`,且已经是最上级了。
+
 - level:用来设置打印级别，大小写无关：TRACE, DEBUG, INFO, WARN, ERROR,不能设置为INHERITED或者同义词NULL。默认是DEBUG。 `<root>`可以包含零个或多个
 
   <appender-ref>元素，标识这个appender将会添加到这个loger。</appender-ref>
@@ -296,17 +297,17 @@ _Spring Boot官方推荐优先使用带有-spring的文件名作为你的日志�
 1. 只配置root
 
   ```xml
-   <configuration>
-       <appender name="Console" class="ch.qos.logback.core.ConsoleAppender">
-           <encoder>
-               <pattern>%d{HH:mm:ss.SSS} [%thread]  %-5level %logger{36} - %msg%n</pattern>
-           </encoder>
-       </appender>
+  <configuration>
+   <appender name="Console" class="ch.qos.logback.core.ConsoleAppender">
+       <encoder>
+           <pattern>%d{HH:mm:ss.SSS} [%thread]  %-5level %logger{36} - %msg%n</pattern>
+       </encoder>
+   </appender>
 
-       <root level="INFO">
-           <appender-ref ref="Console" />
-       </root>
-   </configuration>
+   <root level="INFO">
+       <appender-ref ref="Console" />
+   </root>
+  </configuration>
   ```
 
   - <root level="INFO">将root的打印级别设置为"INFO"，指定了名字为"Console"的appender。</root>
@@ -324,19 +325,19 @@ _Spring Boot官方推荐优先使用带有-spring的文件名作为你的日志�
 2. 带有loger的配置,不指定级别,不指定appender.
 
   ```xml
-   <configuration>
-       <appender name="Console" class="ch.qos.logback.core.ConsoleAppender">
-           <encoder>
-               <pattern>%d{HH:mm:ss.SSS} [%thread]  %-5level %logger{36} - %msg%n</pattern>
-           </encoder>
-       </appender>
+  <configuration>
+   <appender name="Console" class="ch.qos.logback.core.ConsoleAppender">
+       <encoder>
+           <pattern>%d{HH:mm:ss.SSS} [%thread]  %-5level %logger{36} - %msg%n</pattern>
+       </encoder>
+   </appender>
 
-       <logger name="org.xiaokui.springboot.jpa"></logger>
+   <logger name="org.xiaokui.springboot.jpa"></logger>
 
-       <root level="INFO">
-           <appender-ref ref="Console" />
-       </root>
-   </configuration>
+   <root level="INFO">
+       <appender-ref ref="Console" />
+   </root>
+  </configuration>
   ```
 
   - `<logger name="org.xiaokui.springboot.jpa" ></logger>`将控制`org.xiaokui.springboot.jpa`包下的所有类的日志的打印，但是并没用设置打印级别，所以继承他的上级
@@ -348,6 +349,7 @@ _Spring Boot官方推荐优先使用带有-spring的文件名作为你的日志�
   - <root level="INFO">将root的打印级别设置为"INFO"，指定了名字为"Console"的appender。</root>
 
   - 运行SpringBootJpaApplication类,因为SpringBootJpaApplication类 在包org.xiaokui.springboot.jpa中，所以首先执行`<logger name="org.xiaokui.springboot.jpa" />`，将级别为"INFO"及大于"INFO"的日志信息传递给root，本身并不打印；
+
   - root接到下级传递的信息，交给已经配置好的名为"Console"的appender处理，"Console"appender将信息打印到控制台;
 
     打印结果如下:
@@ -361,25 +363,25 @@ _Spring Boot官方推荐优先使用带有-spring的文件名作为你的日志�
 3. 带有多个loger的配置,指定级别,指定appender
 
   ```xml
-   <configuration>
+  <configuration>
 
-       <appender name="Console" class="ch.qos.logback.core.ConsoleAppender">
-           <encoder>
-               <pattern>%d{HH:mm:ss.SSS} [%thread]  %-5level %logger{36} - %msg%n</pattern>
-           </encoder>
-       </appender>
+   <appender name="Console" class="ch.qos.logback.core.ConsoleAppender">
+       <encoder>
+           <pattern>%d{HH:mm:ss.SSS} [%thread]  %-5level %logger{36} - %msg%n</pattern>
+       </encoder>
+   </appender>
 
-       <logger name="org.xiaokui.springboot.jpa">
-       </logger>
+   <logger name="org.xiaokui.springboot.jpa">
+   </logger>
 
-       <logger name="org.xiaokui.springboot.jpa.SpringBootJpaApplication" level="INFO" additivity="false">
-           <appender-ref ref="Console"/>
-       </logger>
+   <logger name="org.xiaokui.springboot.jpa.SpringBootJpaApplication" level="INFO" additivity="false">
+       <appender-ref ref="Console"/>
+   </logger>
 
-       <root level="INFO">
-           <appender-ref ref="Console" />
-       </root>
-   </configuration>
+   <root level="INFO">
+       <appender-ref ref="Console" />
+   </root>
+  </configuration>
   ```
 
   - `<logger name="org.xiaokui.springboot.jpa" />`将控制logback包下的所有类的日志的打印，但是并没用设置打印级别，所以继承他的上级
@@ -389,7 +391,9 @@ _Spring Boot官方推荐优先使用带有-spring的文件名作为你的日志�
     没有设置appender，此loger本身不打印任何信息。</root>
 
   - `<logger name="org.xiaokui.springboot.jpa.SpringBootJpaApplication" level="WARN" additivity="false">`控制`SpringBootJpaApplication`类的日志打印，打印级别为"WARN"; additivity属性为false，表示此loger的打印信息不再向上级传递， 指定了名字为"Console"的appender。
+
   - `<root level="INFO">`将root的打印级别设置为"INFO"，指定了名字为"Console"的appender。
+
   - 运行SpringBootJpaApplication类,先执行
 
     <logger name="org.xiaokui.springboot.jpa.SpringBootJpaApplication" level="WARN" additivity="false">,将级别为"WARN"及大于"WARN"的日志信息交给此loger指定的名为"Console"的appender处理，在控制台中打出日志，不再向此loger的上级 <code>&lt;logger name="org.xiaokui.springboot.jpa"/&gt;</code> 传递打印信息；</logger>
