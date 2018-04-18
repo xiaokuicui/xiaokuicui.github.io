@@ -1,14 +1,12 @@
 ---
 layout: post
-title: JSR 303-Bean Validation介绍及学习笔记
-categories: JSR
-description: JSR 303-Bean Validation介绍及学习笔记
-keywords: JSR BeanValidation
+title: JSR 303-Bean Validation 介绍及学习笔记
+keywords: JSR
 ---
 
 > JCP（Java Community Process）成立于1998年，是使有兴趣的各方参与定义Java的特征和未来版本的正式过程。JCP使用JSR（Java规范请求，Java Specification Requests）作为正式规范文档，描述被提议加入到Java体系中的的规范和技术。 JSR变为final状态前需要正式的公开审查，并由JCP Executive Committee投票决定。最终的JSR会提供一个参考实现，它是免费而且公开源代码的；还有一个验证是否符合API规范的Technology Compatibility Kit。
 
-# 关于 Bean Validation
+# Bean Validation 介绍
 
 在任何时候，当你要处理一个应用程序的业务逻辑，数据校验是你必须要考虑和面对的事情。应用程序必须通过某种手段来确保输入进来的数据从语义上来讲是正确的。在通常的情况下，应用程序是分层的，不同的层由不同的开发人员来完成。很多时候同样的数据验证逻辑会出现在不同的层，这样就会导致代码冗余和一些管理的问题，比如说语义的一致性等。为了避免这样的情况发生，最好是将验证逻辑与相应的域模型进行绑定。
 
