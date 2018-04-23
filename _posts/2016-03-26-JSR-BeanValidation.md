@@ -23,7 +23,7 @@ Bean Validation 中内置的 constraint
 Constraint                  | 详细信息
 --------------------------- | ----------------------------
 @Null                       | 被注释的元素必须为null
-@NotNull                    | 被注释的元素必须部位null
+@NotNull                    | 被注释的元素必须不为null
 @AssertTrue                 | 被注释的元素必须为true
 @AssertFalse                | 被注释的元素必须为false
 @Min(value)                 | 被注释的元素必须是一个数字，其值必须大于等于指定的最小值
@@ -57,21 +57,15 @@ Constraint | 详细信息
 
 ```java
  public class Order{
-   // 必须不为 null, 大小是 10
  @NotNull
  @Size(min = 10, max = 10)
  private String orderId;
- // 必须不为空
  @NotEmpty
  private String customer;
- // 必须是一个电子信箱地址
  @Email
  private String email;
- // 必须不为空
  @NotEmpty
  private String address;
- // 必须不为 null, 必须是下面四个字符串'created', 'paid', 'shipped', 'closed'其中之一
- // @Status 是一个定制化的 contraint
  @NotNull
  @Status
  private String status;
@@ -91,11 +85,8 @@ Constraint | 详细信息
 
 ```java
 public class Product {
- // 必须非空
  @NotEmpty
  private String productName;
- // 必须在 8000 至 10000 的范围内
- // @Price 是一个定制化的 constraint
  @Price
  private float price;
 …
@@ -106,8 +97,6 @@ public class Product {
 清单3.OrderQuery.java
 
 ```java
-// 'to'所表示的日期必须在'from'所表示的日期之后
- // @QueryConstraint 是一个定制化的 constraint
  @QueryConstraint
  public class OrderQuery {
  private Date from;
