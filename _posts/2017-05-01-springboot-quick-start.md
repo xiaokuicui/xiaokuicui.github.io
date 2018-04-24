@@ -212,6 +212,5 @@ spring-boot-starter-undertow                | 使用Undertow作为嵌入式servl
 
 # 参考链接
 
-- [官方参考英文文档](https://docs.spring.io/spring-boot/docs/2.0.0.RELEASE/reference/htmlsingle/)
+- [spring-boot-getting-started](https://docs.spring.io/spring-boot/docs/2.0.1.RELEASE/reference/htmlsingle/#getting-started)
 - [官方参考中文文档](http://noahsnail.com/2016/10/08/2016-10-8-Spring%20Boot%202.0.0%E5%8F%82%E8%80%83%E6%89%8B%E5%86%8C_%E4%B8%AD%E6%96%87%E7%89%88/)
-- [官方 Spring Boot 例子源码](https://github.com/spring-projects/spring-boot/tree/master/spring-boot-samples)
