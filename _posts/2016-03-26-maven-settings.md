@@ -258,7 +258,7 @@ Maven 安装后,用户目录下不会自动生成 settings.xml,如果需要创�
       <!--当Maven验证构件校验文件失败时该怎么做-ignore（忽略），fail（失败），或者warn（警告）。 -->
       <checksumPolicy>warn</checksumPolicy>
     </releases>
-    <!--如何处理远程仓库里快照版本的下载。有了releases和snapshots这两组配置，POM就可以在每个单独的仓库中，为每种类型的构件采取不同的策略。例如，可能有人会决定只为开发目的开启对快照版本下载的支持。参见repositories/repository/releases元素 -->
+    <!--如何处理远程仓库里快照版本的下载。 -->
     <snapshots>
       <enabled />
       <updatePolicy />
