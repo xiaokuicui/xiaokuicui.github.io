@@ -28,12 +28,6 @@ Spring Boot 加载配置文件的优先级从高到低的搜索顺序为：
 
 Spring Boot 搜索 Jar 包外部的`application.{properties|yml}`文件时,优先搜索类路径下的`/config`目录.如果没有,再到类路径的根目录下搜索。
 
-参考源码:
-
-- [spring-configuration-metadata.json#spring.config.location](https://github.com/spring-projects/spring-boot/blob/1.5.x/spring-boot/src/main/resources/META-INF/additional-spring-configuration-metadata.json#L143)
-- [spring-configuration-metadata.json#spring.config.name](https://github.com/spring-projects/spring-boot/blob/1.5.x/spring-boot/src/main/resources/META-INF/additional-spring-configuration-metadata.json#L136)
-- [org.springframework.boot.context.config.ConfigFileApplicationListener](https://github.com/spring-projects/spring-boot/blob/1.5.x/spring-boot/src/main/java/org/springframework/boot/context/config/ConfigFileApplicationListener.java)
-
 # 配置文件配置
 
 Spring Boot 允许我们通过`*.properties`文件、`*.yml`文件来外部化应用程序的配置，只需要在类路径下创建`application.{properties|yml}`文件。
@@ -322,7 +316,7 @@ random.long(min,max) | 随机产生 [min, max) 区间的长整数
 random.uuid          | 产生 UUID 字符串（含'-'字符）
 random.*             | '*'表示除上面列举之外的其他字符，用于随机产生 32 位字符串
 
-参考源码: [org.springframework.boot.context.config.RandomValuePropertySource](https://github.com/spring-projects/spring-boot/blob/1.5.x/spring-boot/src/main/java/org/springframework/boot/context/config/RandomValuePropertySource.java)
+参考源码: [org.springframework.boot.context.config.RandomValuePropertySource](https://github.com/spring-projects/spring-boot/blob/master/spring-boot-project/spring-boot/src/main/java/org/springframework/boot/env/RandomValuePropertySource.java)
 
 `application.properties` 配置示例：
 
@@ -421,5 +415,4 @@ $ java -jar -Dcommand-line-arg="今天天气不错" spring-boot-properties-sampl
 
 # 参考链接
 
-- [spring-boot-features-profiles](https://docs.spring.io/spring-boot/docs/1.5.2.RELEASE/reference/htmlsingle/#boot-features-external-config)
-- [Spring Boot 常用默认属性配置](https://docs.spring.io/spring-boot/docs/current/reference/html/common-application-properties.html)
+- [spring-boot-features-external-config](https://docs.spring.io/spring-boot/docs/2.0.1.RELEASE/reference/htmlsingle/#boot-features-external-config)
