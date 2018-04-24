@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Spring Boot学习笔记-使用Swagger2构建RESTful API
+title: Spring Boot学习笔记-使用 Swagger2 构建 RESTful API
 categories: SpringBoot
 ---
 
