@@ -4,23 +4,23 @@ title: Spring Boot学习笔记-快速上手
 categories: SpringBoot
 ---
 
-​Spring Boot简化了基于Spring应用的初始搭建及开发过程,其充分利用了JavaConfig 的配置模式以及"约定优于配置"的理念,能够极大的简化基于 Spring MVC 的 Web 应用和 REST 服务开发。
+​Spring Boot 简化了基于 Spring 应用的初始搭建及开发过程,其充分利用了 JavaConfig 的配置模式以及"约定优于配置"的理念,能够极大的简化基于 Spring MVC 的 Web 应用和 REST 服务开发。
 
 # 快速上手
 
-1. 通过`SPRING INITIALIZR`生成基本项目
+- 通过`SPRING INITIALIZR`生成基本项目
 
   - 访问 <http://start.spring.io/>
-  - 选择构建工具、spring boot版本及一些工程基本信息,点击"Switch to the full version."可选择Java版本.
-  - 点击Generate Project下载项目压缩包。
+  - 选择构建工具、spring boot 版本及一些工程基本信息,点击 "Switch to the full version." 可选择 Java 版本.
+  - 点击 Generate Project 下载项目压缩包。
 
-2. 解压压缩包,并用IDEA以Maven项目导入
+- 解压压缩包,并用IDEA以Maven项目导入
 
 # 项目结构介绍
 
-SpringBoot建议的目录结果如下：
+Spring Boot 建议的目录结果如下：
 
-```
+```java
   com
     +- example
       +- myproject
@@ -45,124 +45,111 @@ root package结构：`com.example.myproject`
 - service 层主要是业务类代码
 - web负责页面访问控制
 
-# Spring Boot 父级依赖
+# Maven 创建 Spring Boot 项目的两种方式
 
-```java
-<!-- 引入spring-boot-starter-parent父项目 -->
-<parent>
-  <groupId>org.springframework.boot</groupId>
-  <artifactId>spring-boot-starter-parent</artifactId>
-  <version>2.0.0.RELEASE</version>
-</parent>
-```
+- 引入 spring-boot-starter-parent 父项目
 
-`spring-boot-starter-parent`是一个特殊的 starter,引入它之后,当前的项目就是 Spring Boot 项目了,它用来提供相关的Maven默认依赖，常用的包依赖可以省去version标签。关于 Spring Boot 提供了哪些jar包的依赖,可参考[spring-boot-dependencies.pom](https://github.com/spring-projects/spring-boot/blob/v2.0.0.RELEASE/spring-boot-project/spring-boot-dependencies/pom.xml)来获取整合的第三方框架及各框架版本。
-
-如果你不想使用某个依赖默认的版本，您还可以通过覆盖自己的项目中的属性来覆盖各个依赖项，例如，要更换 Spring Data 版本系列，您可以将以下内容添加到pom.xml中。
-
-```java
-<properties>
-        <spring-data-releasetrain.version>Kay-SR4</spring-data-releasetrain.version>
-    </properties>
-```
-
-原本默认版本是Kay-SR5的,现在就使用Kay-SR4版本了.
-
-并不是每个人都喜欢继承自 `spring-boot-starter-parent` POM。您可能有您需要使用的自己的公司标准 parent，或者您可能更喜欢显式声明所有的 Maven 配置。 如果你不想使用`spring-boot-starter-parent`,您仍然可以通过使用`scope = import`依赖关系来保持依赖关系管理：
-
-```java
-<dependencyManagement>
-     <dependencies>
-        <dependency>
-            <!-- Import dependency management from Spring Boot -->
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-dependencies</artifactId>
-            <version>2.0.0.RELEASE</version>
-            <type>pom</type>
-            <scope>import</scope>
-        </dependency>
-    </dependencies>
-</dependencyManagement>
-```
-
-该设置不允许您使用如上所述的属性(properties)覆盖各个依赖项，要实现相同的结果，您需要在dependencyManagement标签中spring-boot-dependencies项之前添加一个配置，例如，要更换 Spring Data 版本系列，您可以将以下内容添加到pom.xml中。
-
-```java
-<dependencyManagement>
-    <dependencies>
-        <!-- Override Spring Data release train provided by Spring Boot -->
-        <dependency>
-            <groupId>org.springframework.data</groupId>
-            <artifactId>spring-data-releasetrain</artifactId>
-            <version>Kay-SR4</version>
-            <scope>import</scope>
-            <type>pom</type>
-        </dependency>
-        <dependency>
-            <!-- Import dependency management from Spring Boot -->
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-dependencies</artifactId>
-            <version>2.0.0.RELEASE</version>
-            <type>pom</type>
-            <scope>import</scope>
-        </dependency>
-    </dependencies>
-</dependencyManagement>
-```
-
-# 编写HelloWorld服务
-
-1. 引入支持web的依赖
-
-  ```xml
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.springframework.boot</groupId>
-                    <artifactId>spring-boot-starter</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
+  ```java
+  <parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <version>2.0.0.RELEASE</version>
+  </parent>
   ```
 
-  - `spring-boot-starter`是 spring boot 的核心.包括 autoconfigure、logging(日志框架)、YAML 配置支持.
-  - `spring-boot-starter-web`使用 spring MVC 构建 web,使用 Tomcat 作为默认的嵌入容器.同时也支持 Hibernate Validator.
+  `spring-boot-starter-parent`是一个特殊的 starter,引入它之后,当前的项目就是 Spring Boot 项目了,它用来提供相关的 Maven 默认依赖,常用的包依赖可以省去 version 标签。关于 Spring Boot 提供了哪些jar包的依赖,可参考[spring-boot-dependencies.pom](https://github.com/spring-projects/spring-boot/blob/v2.0.0.RELEASE/spring-boot-project/spring-boot-dependencies/pom.xml)来获取整合的第三方框架及各框架版本。
 
-2. 编写HelloWorldController内容:
+  如果你不想使用某个依赖默认的版本，您还可以通过覆盖自己的项目中的属性来覆盖各个依赖项,例如要更换 Spring Data 版本系列，您可以将以下内容添加到`pom.xml`中。
+
+  ```java
+    <properties>
+        <spring-data-releasetrain.version>Kay-SR4</spring-data-releasetrain.version>
+    </properties>
+  ```
+
+  原本默认版本是 Kay-SR5 的,现在就使用 Kay-SR4 版本了.
+
+- 使用自定义 Parent POM
+
+  如果需要使用自己公司的 parent,可以通过使用`scope = import`依赖关系来保持依赖关系管理：
+
+  ```java
+  <dependencyManagement>
+       <dependencies>
+          <dependency>
+              <groupId>org.springframework.boot</groupId>
+              <artifactId>spring-boot-dependencies</artifactId>
+              <version>2.0.0.RELEASE</version>
+              <type>pom</type>
+              <scope>import</scope>
+          </dependency>
+      </dependencies>
+  </dependencyManagement>
+  ```
+
+  该设置不允许您使用如上所述的属性(properties)覆盖各个依赖项，要实现相同的结果，您需要在`dependencyManagement`标签中`spring-boot-dependencies`项之前添加一个配置,例如要更换 Spring Data 版本系列,您可以将以下内容添加到`pom.xml`中。
+
+  ```java
+  <dependencyManagement>
+      <dependencies>
+          <dependency>
+              <groupId>org.springframework.data</groupId>
+              <artifactId>spring-data-releasetrain</artifactId>
+              <version>Kay-SR4</version>
+              <scope>import</scope>
+              <type>pom</type>
+          </dependency>
+          <dependency>
+              <groupId>org.springframework.boot</groupId>
+              <artifactId>spring-boot-dependencies</artifactId>
+              <version>2.0.0.RELEASE</version>
+              <type>pom</type>
+              <scope>import</scope>
+          </dependency>
+      </dependencies>
+  </dependencyManagement>
+  ```
+
+# 编写 HelloWorld 服务
+
+- 引入 spring-boot-starter-web 依赖
+
+  ```xml
+  <dependency>
+  <groupId>org.springframework.boot</groupId>
+  <artifactId>spring-boot-starter-web</artifactId>
+  </dependency>
+  ```
+
+- 编写 HelloWorldController 内容:
 
   ```java
   @RestController
   public class HelloWorldController {
 
-      @RequestMapping(value = "/hello", method = RequestMethod.GET)
-      public String helloWorld() {
-          return "Hello World";
-      }
+  @RequestMapping(value = "/hello", method = RequestMethod.GET)
+  public String helloWorld() {
+  return "Hello World";
+  }
 
   }
   ```
 
-  标注`@RestController`注解的类不用再使用@Responsebody,也不用在写jackjson配置了！
+  - 标注`@RestController`注解的类不用再使用`@Responsebody`,也不用在写`jackjson`配置.
 
-3. 启动Application主类运行应用程序,访问<http://localhost:8080/hello就可以看到效果了。>
+- 启动 Application 主类运行应用程序,访问<http://localhost:8080/hello就可以看到效果了。>
 
   ```java
   @SpringBootApplication // same as @Configuration @EnableAutoConfiguration @ComponentScan
   public class Application {
 
-     public static void main(String[] args) {
-         SpringApplication.run(Application.class, args);
-     }
+  public static void main(String[] args) {
+  SpringApplication.run(Application.class, args);
+  }
   }
   ```
 
-  `@SpringBootApplication`注解相当于使用`@Configuration @EnableAutoConfiguration @ComponentScan`三个组合。
+  - `@SpringBootApplication`注解相当于使用`@Configuration @EnableAutoConfiguration @ComponentScan`三个组合。
 
 # Spring Boot Starter介绍
 
@@ -221,10 +208,10 @@ spring-boot-starter-undertow                | 使用Undertow作为嵌入式servl
 
 --------------------------------------------------------------------------------
 
-​[示例代码](https://github.com/xiaokuicui/spring-boot-cloud-learning-examples/tree/master/spring-boot-helloworld)
+​[示例代码](https://github.com/xiaokuicui/spring-boot-cloud-learning-examples/tree/master/spring-boot-quick-start)
 
 # 参考博客
 
 - [官方参考英文文档](https://docs.spring.io/spring-boot/docs/2.0.0.RELEASE/reference/htmlsingle/)
 - [官方参考中文文档](http://noahsnail.com/2016/10/08/2016-10-8-Spring%20Boot%202.0.0%E5%8F%82%E8%80%83%E6%89%8B%E5%86%8C_%E4%B8%AD%E6%96%87%E7%89%88/)
-- [官方SpringBoot例子源码](https://github.com/spring-projects/spring-boot/tree/master/spring-boot-samples)
+- [官方 Spring Boot 例子源码](https://github.com/spring-projects/spring-boot/tree/master/spring-boot-samples)
