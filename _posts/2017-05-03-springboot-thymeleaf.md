@@ -6,7 +6,7 @@ categories: SpringBoot
 
 Spring Boot 对 Thymeleaf 模板引擎提供了自配置的良好支持。
 
-> 如果使用 Thymeleaf 需要在 application.{properties|yml} 中设置 spring.thymeleaf.cache = false。如果需要设置其他 Thymeleaf 自定义选项,可以参考[ThymeleafAutoConfiguration](https://github.com/spring-projects/spring-boot/blob/master/spring-boot-project/spring-boot-autoconfigure/src/main/java/org/springframework/boot/autoconfigure/thymeleaf/ThymeleafAutoConfiguration.java)
+> 如果使用 Thymeleaf 需要在 `application.{properties|yml}` 中设置 `spring.thymeleaf.cache = false`。如果需要设置其他 Thymeleaf 自定义选项,可以参考[ThymeleafAutoConfiguration](https://github.com/spring-projects/spring-boot/blob/master/spring-boot-project/spring-boot-autoconfigure/src/main/java/org/springframework/boot/autoconfigure/thymeleaf/ThymeleafAutoConfiguration.java)
 
 # POM 依赖
 
