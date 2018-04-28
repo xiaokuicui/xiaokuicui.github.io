@@ -54,7 +54,6 @@ spring:
     view:
       prefix: /WEB-INF/pages/
       suffix: .jsp
-`
 ```
 
 # 模板文件
