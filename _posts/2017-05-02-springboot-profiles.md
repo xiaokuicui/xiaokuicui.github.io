@@ -200,7 +200,9 @@ spring:
 
 --------------------------------------------------------------------------------
 
-[示例代码](https://github.com/xiaokuicui/spring-boot-cloud-learning-examples/tree/master/spring-boot-profiles)
+# 示例代码
+
+- [spring-boot-profiles](https://github.com/xiaokuicui/spring-boot-cloud-learning-examples/tree/master/spring-boot-profiles)
 
 # 参考链接
 

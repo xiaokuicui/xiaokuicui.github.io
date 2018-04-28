@@ -93,4 +93,6 @@ public class Application {
 
 --------------------------------------------------------------------------------
 
-[示例代码](https://github.com/xiaokuicui/spring-boot-cloud-learning-examples/tree/master/spring-boot-thymeleaf)
+# 示例代码
+
+- [spring-boot-jsp](https://github.com/xiaokuicui/spring-boot-cloud-learning-examples/tree/master/spring-boot-jsp)

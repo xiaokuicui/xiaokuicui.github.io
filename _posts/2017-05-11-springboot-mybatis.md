@@ -382,29 +382,29 @@ public interface MyMapper<T> extends Mapper<T>,MySqlMapper<T> {
 
   @Override
   public List<Country> getAll(Country country) {
-      if (country.getPage() != null && country.getRows() != null) {
-          PageHelper.startPage(country.getPage(), country.getRows());
-      }
-      return countryMapper.selectAll();
+     if (country.getPage() != null && country.getRows() != null) {
+         PageHelper.startPage(country.getPage(), country.getRows());
+     }
+     return countryMapper.selectAll();
   }
 
   @Override
   public Country getById(Long id) {
-      return countryMapper.selectByPrimaryKey(id);
+     return countryMapper.selectByPrimaryKey(id);
   }
 
   @Override
   public void deleteById(Long id) {
-       countryMapper.deleteByPrimaryKey(id);
+      countryMapper.deleteByPrimaryKey(id);
   }
 
   @Override
   public void save(Country country) {
-      if(country.getId() != null){
-          countryMapper.updateByPrimaryKey(country);
-      }else {
-          countryMapper.insert(country);
-      }
+     if(country.getId() != null){
+         countryMapper.updateByPrimaryKey(country);
+     }else {
+         countryMapper.insert(country);
+     }
   }
   }
   ```
@@ -424,12 +424,12 @@ public interface MyMapper<T> extends Mapper<T>,MySqlMapper<T> {
   @ApiImplicitParam(name = "county",value = "County实体",required = false,dataType = "country")
   @RequestMapping(value = "/list",method = RequestMethod.GET,produces = "application/json")
   public Map<String,Object> getAll(@RequestBody Country country){
-      Map<String,Object> map = new HashMap<>();
-      List<Country> list = countryService.getAll(country);
-      map.put("code","0");
-      map.put("data",new PageInfo<Country>(list));
-      map.put("message","成功");
-      return map;
+     Map<String,Object> map = new HashMap<>();
+     List<Country> list = countryService.getAll(country);
+     map.put("code","0");
+     map.put("data",new PageInfo<Country>(list));
+     map.put("message","成功");
+     return map;
   }
   }
   ```
@@ -440,7 +440,9 @@ public interface MyMapper<T> extends Mapper<T>,MySqlMapper<T> {
 
 --------------------------------------------------------------------------------
 
-# [示例代码](https://github.com/xiaokuicui/spring-boot-cloud-learning-examples/tree/master/spring-boot-mybatis)
+# 示例代码
+
+- [spring-boot-mybatis](https://github.com/xiaokuicui/spring-boot-cloud-learning-examples/tree/master/spring-boot-mybatis)
 
 # 参考文档
 

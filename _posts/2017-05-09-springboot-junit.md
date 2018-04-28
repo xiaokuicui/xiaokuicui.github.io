@@ -240,5 +240,3 @@ public void saveUser() throws Exception{
 将单个表修改为InnoDB存储引擎(也可以用此命令将InnoDB换为MyISAM)：`ALTER TABLE t_user ENGINE=INNODB;`
 
 --------------------------------------------------------------------------------
-
-# [示例代码](https://github.com/xiaokuicui/spring-boot-cloud-learning-examples/tree/master/spring-boot-jpa)

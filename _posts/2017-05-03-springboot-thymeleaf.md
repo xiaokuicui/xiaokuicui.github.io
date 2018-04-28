@@ -98,7 +98,9 @@ spring.thymeleaf.view-names= # Comma-separated list of view names that can be re
 
 --------------------------------------------------------------------------------
 
-[示例代码](https://github.com/xiaokuicui/spring-boot-cloud-learning-examples/tree/master/spring-boot-thymeleaf)
+# 示例代码
+
+- [spring-boot-thymeleaf](https://github.com/xiaokuicui/spring-boot-cloud-learning-examples/tree/master/spring-boot-thymeleaf)
 
 # 参考链接
 

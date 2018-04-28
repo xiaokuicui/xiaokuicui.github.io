@@ -146,7 +146,9 @@ public class UserController {
 
 --------------------------------------------------------------------------------
 
-# [示例代码](https://github.com/xiaokuicui/spring-boot-cloud-learning-examples/tree/master/spring-boot-swagger)
+# 示例代码
+
+- [spring-boot-swagger](https://github.com/xiaokuicui/spring-boot-cloud-learning-examples/tree/master/spring-boot-swagger)
 
 # 参考链接
 

@@ -411,7 +411,9 @@ $ java -jar -Dcommand-line-arg="今天天气不错" spring-boot-properties-sampl
 
 --------------------------------------------------------------------------------
 
-[示例代码](https://github.com/xiaokuicui/spring-boot-cloud-learning-examples/tree/master/spring-boot-properties)
+# 示例代码
+
+- [spring-boot-properties](https://github.com/xiaokuicui/spring-boot-cloud-learning-examples/tree/master/spring-boot-properties)
 
 # 参考链接
 

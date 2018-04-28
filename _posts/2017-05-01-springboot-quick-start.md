@@ -208,7 +208,9 @@ spring-boot-starter-undertow                | 使用Undertow作为嵌入式servl
 
 --------------------------------------------------------------------------------
 
-​[示例代码](https://github.com/xiaokuicui/spring-boot-cloud-learning-examples/tree/master/spring-boot-quick-start)
+​# 示例代码
+
+- [spring-boot-quick-start](https://github.com/xiaokuicui/spring-boot-cloud-learning-examples/tree/master/spring-boot-quick-start)
 
 # 参考链接
 
