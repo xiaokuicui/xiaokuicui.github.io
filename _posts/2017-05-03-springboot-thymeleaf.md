@@ -74,7 +74,7 @@ public class Application {
 
 当修改 css、js 等静态资源文件的内容或模板文件的内容时，刷新客户端浏览器，发现内容还是老的，Spring Boot 内置的 Servelt 容器并没有实时重新加载修改过的文件内容。
 
-实现热加载（live reload）可参考：
+实现热加载（live reload）可参考:[Spring Boot 实现热加载和远程调试](http://www.xiaokui.org/2017/05/03/springboot-live-reload/)
 
 # Thymeleaf 默认参数配置
 
