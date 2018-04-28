@@ -72,7 +72,9 @@ public class Application {
 
 # 模板文件和静态资源文件的缓存问题
 
-当修改 css、js 等静态资源文件的内容或模板文件的内容时，刷新客户端浏览器，发现内容还是老的，说明 Spring Boot 内置的 Servelt 容器并没有实时重新加载修改过的文件内容。你只能在每次修改静态资源文件时，虽然不需要重启服务，但是你要重新编译一次，IntelliJ IDEA 中按一次 Ctrl + F9 即可。 实现热加载（live reload）可参考：
+当修改 css、js 等静态资源文件的内容或模板文件的内容时，刷新客户端浏览器，发现内容还是老的，Spring Boot 内置的 Servelt 容器并没有实时重新加载修改过的文件内容。
+
+实现热加载（live reload）可参考：
 
 # Thymeleaf 默认参数配置
 
