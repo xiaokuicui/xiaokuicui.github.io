@@ -32,7 +32,16 @@ Spring Boot 官方并不推荐使用 JSP 模板引擎，如果有可能，应尽
 
 # Controller
 
-````java
+```java
+@Controller
+public class WelcomeController {
+
+    @RequestMapping("/index")
+    public String welcome(ModelMap model) {
+        model.put("message", "Hello JSP!");
+        return "index";
+    }
+}
 ```
 
 # 配置文件
@@ -45,7 +54,8 @@ spring:
     view:
       prefix: /WEB-INF/pages/
       suffix: .jsp
-````
+`
+```
 
 # 模板文件
 
