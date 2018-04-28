@@ -314,7 +314,7 @@ random.long          | 随机产生正负的长整数
 random.long(max)     | 随机产生 [0, max) 区间的长整数
 random.long(min,max) | 随机产生 [min, max) 区间的长整数
 random.uuid          | 产生 UUID 字符串（含'-'字符）
-random.*             | '*'表示除上面列举之外的其他字符，用于随机产生 32 位字符串
+random.*             | `*`表示除上面列举之外的其他字符，用于随机产生 32 位字符串
 
 参考源码: [org.springframework.boot.context.config.RandomValuePropertySource](https://github.com/spring-projects/spring-boot/blob/master/spring-boot-project/spring-boot/src/main/java/org/springframework/boot/env/RandomValuePropertySource.java)
 
