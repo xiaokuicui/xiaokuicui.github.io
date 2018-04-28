@@ -31,7 +31,7 @@ spring.thymeleaf.cache=false
 spring.velocity.cache=false
 ```
 
-> 在 IntelliJ IDEA 中实现热部署之后,需要重新编译一次按一次 Command + F9 即可。也可以配置 IDEA 自动编译,参考 [IDEA 实现自动编译]()
+> 在 IntelliJ IDEA 中实现热部署之后,需要重新编译一次按一次 Command + F9 即可。也可以配置 IDEA 自动编译,参考 [IDEA 实现自动编译](http://www.xiaokui.org/2016/03/28/idea-auto-compiler/)
 
 # 远程调试
 
@@ -57,4 +57,4 @@ spring.velocity.cache=false
 
 - 在本地 IntelliJ IDEA 中,选择 Debug Configurations 进行配置后,Debug 运行即可进行远程调试。
 
-![Remote Configuration]()
+![Remote Configuration](https://raw.githubusercontent.com/xiaokuicui/xiaokuicui.github.io/master/assets/images/idea/idea-remote-config.png)
