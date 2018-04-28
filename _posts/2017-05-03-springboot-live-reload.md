@@ -31,7 +31,7 @@ spring.thymeleaf.cache=false
 spring.velocity.cache=false
 ```
 
-> 在 IntelliJ IDEA 中实现热部署之后,需要重新编译一次按一次 Command + F9 即可。
+> 在 IntelliJ IDEA 中实现热部署之后,需要重新编译一次按一次 Command + F9 即可。也可以配置 IDEA 自动编译,参考 [IDEA 实现自动编译]()
 
 # 远程调试
 
