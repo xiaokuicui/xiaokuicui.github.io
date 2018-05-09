@@ -16,7 +16,7 @@ categories: SpringBoot
 
 # Service 层单元测试
 
-在`src/test/java`目录下创建对应Service的测试类,代码如下：
+在`src/test/java`目录下创建对应 Service 的测试类,代码如下：
 
 ```java
 
@@ -36,9 +36,30 @@ public class UserServiceTest {
 }
 ```
 
-上面就是最简单的单元测试写法,顶部只要`@RunWith(SpringRunner.class)`和`@SpringBootTest`即可,想要执行的时候，鼠标放在对应的方法，右键选择run该方法即可。
+`@SpringBootTest`注解是普通的 Spring 项目（非 Spring Boot 项目）中编写测试代码所使用的`@ContextConfiguration`注解的替代品。其作用是用于确定如何装载 Spring 应用程序的上下文资源。 当运行 Spring Boot 应用程序测试时,它会自动的从当前测试类所在的包起一层一层向上搜索，直到找到一个`@SpringBootApplication`或`@SpringBootConfiguration`注释类为止。以此来确定如何装载 Spring 应用程序的上下文资源。只要按 Spring Boot 的约定组织代码结构,项目的主配置通常是可以被发现的。
 
-测试用例中使用了`assertThat`断言,下文中会介绍，也推荐大家使用该断言。
+如果搜索算法搜索不到你项目的主配置文件，将报出异常：`java.lang.IllegalStateException: Unable to find a @SpringBootConfiguration, you need to use @ContextConfiguration or @SpringBootTest(classes=…) with your test`。
+
+解决办法是,手工指定你要装载的主配置文件：
+
+```java
+@RunWith(SpringRunner.class)
+@SpringBootTest(classes = SpringBootJpaApplication.class)
+public class UserServiceTest {
+
+    @Autowired
+    private UserService userService;
+
+    @Test
+    public void findUserTest(){
+        Optional<User> user = userService.findUserById(1L);
+
+        Assert.assertThat(user.get().getUserName(), CoreMatchers.is("string"));
+    }
+}
+```
+
+基于 Spring 环境的 Junit 集成测试还需要使用`@RunWith(SpringJUnit4ClassRunner.class)`注解,该注解能够改变 Junit 并让其运行在 Spring 的测试环境,以得到 Spring 测试环境的上下文支持。否则在 Junit 测试中，Bean 的自动装配等注解将不起作用。但由于 `SpringJUnit4ClassRunner` 不方便记忆，Spring 4.3 起提供了一个等同于 `SpringJUnit4ClassRunner` 的类 `SpringRunner`，因此可以简写成：`@RunWith(SpringRunner.class)`.
 
 # Controller 层单元测试
 
