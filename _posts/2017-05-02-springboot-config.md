@@ -6,61 +6,6 @@ categories: SpringBoot
 
 Spring Boot 允许我们通过`*.properties`文件、`*.yml`文件、环境变量、命令行参数等来外部化应用程序的配置,以便在不同的环境可以使用同一套程序代码。
 
-# 配置加载优先级
-
-Spring Boot 加载配置文件的优先级从高到低的搜索顺序为：
-
-- 注解`@TestPropertySource`设置的属性文件
-- 注解`@SpringBootTest#properties`设置的属性文件
-- 命令行参数
-- ServletConfig 初始化参数
-- ServletContext 初始化参数
-- 来自`java:comp/env`的 JNDI 属性
-- Java 系统属性（通过`System.getProperties()`能获取到的）
-- 操作系统环境变量
-- 含有`random.*`值的属性
-- Jar 包外部的`application-{profile}.{properties|yml}`
-- Jar 包内部的`application-{profile}.{properties|yml}`
-- Jar 包外部的`application.{properties|yml}`
-- Jar 包内部的`application.{properties|yml}`
-- 注解`@PropertySource`设置的属性文件
-- 启动类`SpringApplication.setDefaultProperties`设置的默认属性
-
-Spring Boot 搜索 Jar 包外部的`application.{properties|yml}`文件时,优先搜索类路径下的`/config`目录.如果没有,再到类路径的根目录下搜索。
-
-# 配置文件配置
-
-Spring Boot 允许我们通过`*.properties`文件、`*.yml`文件来外部化应用程序的配置，只需要在类路径下创建`application.{properties|yml}`文件。
-
-- properties 配置文件
-
-  ```properties
-  email-name = xiaokui
-  email-from = xiaokui@gmail.com
-  ```
-
-- yaml 配置文件
-
-  YAML 是一种专门用来编写配置文件`*.yml`的语言,它的语法简洁,也方便人们阅读。
-
-  ```yaml
-  # 自定义属性
-  data-structure:
-    # 简单键值对
-    key-value: YAML Sample
-    # 数组
-    array: value1, value2, value3
-    # List 集合
-    list:
-      - value1
-      - value2
-      - value3
-    # Map 散列表
-    map:
-      name: xiaokui
-      email: xiaokui@gmail.com
-  ```
-
 # 属性占位符
 
 在配置文件中,可以使用`${var}`语法引用已经定义的属性的值。
