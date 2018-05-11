@@ -6,7 +6,7 @@ categories: SpringBoot
 
 Spring Profiles 提供了一套隔离应用配置的方式，它允许我们通过定义不同的 profiles 来提供不同组合的配置。在不同的环境中，启动应用时可以通过选择激活某组特定的 profiles 来适应运行时环境，以达到在不同的环境可以使用相同的一套程序代码。
 
-# 使用`@Profiles` 创建 profiles
+# 使用`@Profile` 创建 profiles
 
 Spring 提供了`@Profile`注解，用于创建 `profiles` 配置。可以在`@Component(@Service、@Repository)` 或`@Configuration`注解标注的类中使用它。
 
