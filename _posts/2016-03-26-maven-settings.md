@@ -282,3 +282,9 @@ Maven 安装后,用户目录下不会自动生成 settings.xml,如果需要创�
   <activeProfile>env-test</activeProfile>
 </activeProfiles>
 ```
+
+--------------------------------------------------------------------------------
+
+# 参考链接
+
+- [Maven Settings Reference](https://maven.apache.org/settings.html)
