@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Spring Boot学习笔记-实现 druid 多数据源配置
+title: Spring Boot学习笔记-多数据源配置
 categories: SpringBoot
 ---
 
