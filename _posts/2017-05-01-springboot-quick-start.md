@@ -10,11 +10,11 @@ categories: SpringBoot
 
 - 通过`SPRING INITIALIZR`生成基本项目
 
-  - 访问 <http://start.spring.io/>
+  - 访问 [官方 SPRING INITIALIZR](http://start.spring.io/)
   - 选择构建工具、spring boot 版本及一些工程基本信息,点击 "Switch to the full version." 可选择 Java 版本.
   - 点击 Generate Project 下载项目压缩包。
 
-- 解压压缩包,并用IDEA以Maven项目导入
+- 解压压缩包,并用 IDEA 以 Maven 项目导入
 
 # 项目结构介绍
 
@@ -38,12 +38,12 @@ Spring Boot 建议的目录结果如下：
         |
 ```
 
-root package结构：`com.example.myproject`
+root package 结构：`com.example.myproject`
 
 - Application.java 建议放到根目录下面,主要用于做一些框架配置
-- domain目录主要用于实体（Entity）与数据访问层（Repository）
+- domain 层主要用于实体（Entity）与数据访问层（Repository）
 - service 层主要是业务类代码
-- web负责页面访问控制
+- web 层负责页面访问控制
 
 # Maven 创建 Spring Boot 项目的两种方式
 
@@ -57,7 +57,7 @@ root package结构：`com.example.myproject`
   </parent>
   ```
 
-  `spring-boot-starter-parent`是一个特殊的 starter,引入它之后,当前的项目就是 Spring Boot 项目了,它用来提供相关的 Maven 默认依赖,常用的包依赖可以省去 version 标签。关于 Spring Boot 提供了哪些jar包的依赖,可参考[spring-boot-dependencies.pom](https://github.com/spring-projects/spring-boot/blob/v2.0.0.RELEASE/spring-boot-project/spring-boot-dependencies/pom.xml)来获取整合的第三方框架及各框架版本。
+  `spring-boot-starter-parent`是一个特殊的 starter,引入它之后,当前的项目就是 Spring Boot 项目了,它用来提供相关的 Maven 默认依赖,常用的包依赖可以省去 version 标签。关于 Spring Boot 提供了哪些 jar 包的依赖,可参考 [spring-boot-dependencies.pom](https://github.com/spring-projects/spring-boot/blob/v2.0.0.RELEASE/spring-boot-project/spring-boot-dependencies/pom.xml) 来获取整合的第三方框架及各框架版本。
 
   如果你不想使用某个依赖默认的版本，您还可以通过覆盖自己的项目中的属性来覆盖各个依赖项,例如要更换 Spring Data 版本系列，您可以将以下内容添加到`pom.xml`中。
 
@@ -87,7 +87,7 @@ root package结构：`com.example.myproject`
   </dependencyManagement>
   ```
 
-  该设置不允许您使用如上所述的属性(properties)覆盖各个依赖项，要实现相同的结果，您需要在`dependencyManagement`标签中`spring-boot-dependencies`项之前添加一个配置,例如要更换 Spring Data 版本系列,您可以将以下内容添加到`pom.xml`中。
+  该设置不允许您使用如上所述的属性 (properties) 覆盖各个依赖项，要实现相同的结果，您需要在 `dependencyManagement` 标签中 `spring-boot-dependencies` 项之前添加一个配置,例如要更换 Spring Data 版本系列,您可以将以下内容添加到 `pom.xml` 中。
 
   ```java
   <dependencyManagement>
@@ -116,8 +116,8 @@ root package结构：`com.example.myproject`
 
   ```xml
   <dependency>
-  <groupId>org.springframework.boot</groupId>
-  <artifactId>spring-boot-starter-web</artifactId>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-web</artifactId>
   </dependency>
   ```
 
@@ -127,15 +127,15 @@ root package结构：`com.example.myproject`
   @RestController
   public class HelloWorldController {
 
-  @RequestMapping(value = "/hello", method = RequestMethod.GET)
-  public String helloWorld() {
-  return "Hello World";
-  }
+    @RequestMapping(value = "/hello", method = RequestMethod.GET)
+    public String helloWorld() {
+      return "Hello World";
+    }
 
   }
   ```
 
-  - 标注`@RestController`注解的类不用再使用`@Responsebody`,也不用在写`jackjson`配置.
+  - `@RestController`注解相当于使用`@Responsebody、@Controller`两个组合.
 
 - 启动 Application 主类运行应用程序,访问<http://localhost:8080/hello就可以看到效果了。>
 
@@ -143,9 +143,9 @@ root package结构：`com.example.myproject`
   @SpringBootApplication // same as @Configuration @EnableAutoConfiguration @ComponentScan
   public class Application {
 
-  public static void main(String[] args) {
-  SpringApplication.run(Application.class, args);
-  }
+    public static void main(String[] args) {
+      SpringApplication.run(Application.class, args);
+    }
   }
   ```
 
