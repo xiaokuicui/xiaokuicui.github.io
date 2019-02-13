@@ -80,17 +80,44 @@ categories: 计算机基础
 
 # 3.数组
 
-1. 什么是数组?
+![数组](https://raw.githubusercontent.com/xiaokuicui/xiaokuicui.github.io/master/assets/images/data/array/array.jpg)
 
-  ![数组](https://raw.githubusercontent.com/xiaokuicui/xiaokuicui.github.io/master/assets/images/data/array/array.jpg)
+- 数组(Array)是一种线性表数据结构,它用一组连续的内存空间来存储一组具有相同类型的数据.
+- 线性表就是数据排成像一条线一样的结构。每个线性表上的数据最多只有前和后两个方向。
+- 在数组中插入和删除一个数据,为了保证内存数据的连续性,需要做大量的搬移操作,所以时间复杂度是 O(n).
+- 数组通过寻址公式 `a[i]_address = base_adress + i * data_type_size` 来实现根据下标随机访问元素的.其中 base_address 为数组的首地址,data_type_size 表示数组中每个元素的大小.
+- 数组支持随机访问,根据下标随机访问的时间复杂度是 O(1).
+- 数组简单易用,在实现上使用的是连续的内存空间,可以借助 CPU 的缓存机制,预读数组中的数据,所以访问效果更高。而链表在内存中并不是连续存储,所以对 CPU 缓存不友好,没办法有效预读。
 
-  - 数组(Array)是一种线性表数据结构,它用一组连续的内存空间来存储一组具有相同类型的数据.
-  - 线性表就是数据排成像一条线一样的结构。每个线性表上的数据最多只有前和后两个方向。
-  - 在数组中插入和删除一个数据,为了保证连续性,需要做大量的搬移操作。
-  - 数组是通过 `a[i]_address = base_adress + i * data_type_size` 来实现根据下标随机访问元素的.其中 data_type_size 表示数组中每个元素的大小.
-  - 数组支持随机访问,根据下标随机访问的时间复杂度是 O(1).
+  CPU 从内存中读取数据的时会先把读取到的数据加载到 CPU 缓存中。而 CPU 每次从内存读取数据并不是只读取那个特定要访问的地址,而是读取一个数据块并保存到 CPU 缓存中,然后下次访问内存数据的时候就会先从 CPU 缓存开始查找,如果找到就不需要在从内存中取。因为数组的内存空间是连续的,所以加载某个下标的时候就可以把后几个下标元素也加载到 CPU 缓存中。
 
 # 4.链表
+
+![链表和数组内存分布](https://raw.githubusercontent.com/xiaokuicui/xiaokuicui.github.io/master/assets/images/data/%E9%93%BE%E8%A1%A8%E5%92%8C%E6%95%B0%E7%BB%84%E5%86%85%E5%AD%98%E5%88%86%E5%B8%83.jpg)
+
+> 链表中的数据并非连续存储的,所以插入和删除的时候不需要为了保证内存的连续性而做大量的搬移操作,所以时间复杂度是 O(1) .链表查找的时候需要根据指针一个节点一个节点的依次遍历,直到找到相应的节点.时间复杂度是 O(n).
+
+- ![单链表](https://raw.githubusercontent.com/xiaokuicui/xiaokuicui.github.io/master/assets/images/data/%E5%8D%95%E9%93%BE%E8%A1%A8.jpg)
+
+- ![双向链表](https://raw.githubusercontent.com/xiaokuicui/xiaokuicui.github.io/master/assets/images/data/%E5%8F%8C%E5%90%91%E9%93%BE%E8%A1%A8.jpg)
+
+- ![循环链表](https://raw.githubusercontent.com/xiaokuicui/xiaokuicui.github.io/master/assets/images/data/%E5%BE%AA%E7%8E%AF%E9%93%BE%E8%A1%A8.jpg)
+
+  - 循环链表是一种特殊的单链表,优点是从链尾到链头非常方便.当处理的数据具有环型结构特点时,就特别适合采用循环链表。比如著名的[约瑟夫问题](https://zh.wikipedia.org/wiki/%E7%BA%A6%E7%91%9F%E5%A4%AB%E6%96%AF%E9%97%AE%E9%A2%98)
+
+- ![双向循环链表](https://raw.githubusercontent.com/xiaokuicui/xiaokuicui.github.io/master/assets/images/data/%E5%8F%8C%E5%90%91%E5%BE%AA%E7%8E%AF%E9%93%BE%E8%A1%A8.jpg)
+
+- 如何用链表实现 LRU (最近最少使用)缓存淘汰算法?
+
+  维护一个有序的单链表,越靠近尾部的节点是越早之前访问的.当有一个新的数据被访问时,从链表头开始顺序遍历链表.
+
+  1. 如果此数据之前已经被缓存在链表中了,遍历得到这个数据对应的节点,并将其从原来的位置删除并插入链表的头部.
+  2. 如果此数据没有缓存在链表中,分为两种情况:
+
+    - 如果此时缓存未满,则将此结点直接插入链表的头部.
+    - 如果此时缓存已满,则删除链表尾部的结点,将新的数据插入链表的头部.
+
+- 如何判断一个字符串是否是回文字符串,如果字符串是通过一个单链表来存储的,如何判断该字符串是回文串?
 
 # 5.栈
 
