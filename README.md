@@ -1,6 +1,7 @@
 日常工作/学习笔记.欢迎 Star 和 Fork.
 
-访问地址：<http://www.xiaokui.org>
+# 访问地址：<http://www.xiaokui.org>
+访问地址：<https://xiaokuicui.github.io/>
 
 博客主题使用: [Yummy-Jekyll](https://github.com/DONGChuan/Yummy-Jekyll)
 
