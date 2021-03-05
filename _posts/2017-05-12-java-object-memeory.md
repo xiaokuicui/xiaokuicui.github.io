@@ -18,6 +18,5 @@ Java 对象占用内存是如何分配的。
   64 为JVM上，非数组对象头占用16个字节，数组对象占用20个字节。如果开启压缩指针的话，非数组对象头占用12个字节（8 + 4），数组对象头占用16个字节（8 + 4 + 4）
   ![appearance-theme](https://raw.githubusercontent.com/xiaokuicui/xiaokuicui.github.io/master/assets/images/idea-appearance-theme.png)
 
-
 2. 实例数据
 3. 内存填充
